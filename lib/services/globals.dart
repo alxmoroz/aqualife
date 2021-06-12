@@ -10,9 +10,11 @@ late AppSettings settings;
 S get loc => S.current;
 
 //TODO: UI-constants
-bool get isTablet => iosInfo.model == 'iPad';
+// bool get isTablet => iosInfo.model == 'iPad';
+bool get isTablet => false;
 
-double get cardPadding => isTablet ? 20 : 10;
+// double get cardPadding => isTablet ? 20 : 10;
+double get cardPadding => 10;
 
 class Globals {
   static Future<void> initialize() async {
