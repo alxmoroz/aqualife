@@ -401,7 +401,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.aeonika.AquaLife;
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.w-cafe.AquaLife";
 				PRODUCT_NAME = AquaLife;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -549,7 +549,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.aeonika.AquaLife;
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.w-cafe.AquaLife";
 				PRODUCT_NAME = AquaLife;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -586,7 +586,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.aeonika.AquaLife;
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.w-cafe.AquaLife";
 				PRODUCT_NAME = AquaLife;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
