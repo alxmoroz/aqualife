@@ -1,3 +1,5 @@
+import 'package:aqualife/ui/components/colors.dart';
+import 'package:aqualife/ui/components/images.dart';
 import 'package:aqualife/ui/components/text/text_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +25,15 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      child: H3('AquaLife'),
+    return CupertinoPageScaffold(
+      child: Container(
+        decoration: bgDecoration(context),
+        child: SafeArea(
+          child: Center(
+            child: H3('AquaLife', color: darkColor),
+          ),
+        ),
+      ),
     );
   }
 }
