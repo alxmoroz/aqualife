@@ -1,11 +1,12 @@
+import 'package:aqualife/services/globals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../components/buttons.dart';
 import '../components/colors.dart';
 import '../components/icons.dart';
 import '../components/images.dart';
-import '../components/material_wrapper.dart';
 import '../components/text/text_widgets.dart';
 import 'daily_progress_wave_indicator.dart';
 
@@ -15,13 +16,7 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  double dayQuota = 2000;
-  double dayValue = 0;
-
-  void updateState() {
-    dayQuota = 2500;
-    dayValue = 1000;
-  }
+  void updateState() {}
 
   @override
   void initState() {
@@ -36,27 +31,25 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: materialWrap(
-        Container(
-          decoration: bgDecoration(context),
-          child: Stack(
-            children: [
-              DailyProgressWaveIndicator(dayValue / dayQuota),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Button(
-                  null,
-                  null,
-                  padding: const EdgeInsets.all(30),
-                  child: Container(child: plusIcon),
-                ),
+    return Container(
+      decoration: bgDecoration(context),
+      child: Observer(
+        builder: (_) => Stack(
+          children: [
+            DailyProgressWaveIndicator(recordsState.todayWaterQuantity / recordsState.dayQuota),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Button(
+                null,
+                () => recordsState.addRecord(quantity: 50),
+                padding: const EdgeInsets.all(30),
+                child: Container(child: plusIcon),
               ),
-              Center(
-                child: H3('AquaLife', color: darkColor),
-              ),
-            ],
-          ),
+            ),
+            Center(
+              child: H3(recordsState.todayWaterQuantity.toString(), color: darkColor),
+            ),
+          ],
         ),
       ),
     );

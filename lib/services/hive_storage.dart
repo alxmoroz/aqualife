@@ -1,6 +1,8 @@
 // Copyright (c) 2021. Alexandr Moroz
 
 import 'package:aqualife/models/app_settings.dart';
+import 'package:aqualife/models/liquid.dart';
+import 'package:aqualife/models/record.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -8,12 +10,16 @@ const bool _kIsWeb = identical(0, 0.0);
 
 class HType {
   static const AppSettings = 0;
+  static const Record = 1;
+  static const Liquid = 2;
 }
 
 class HiveStorage {
   HiveStorage();
 
   static late Box<AppSettings> appSettingsBox;
+  static late Box<Liquid> liquidBox;
+  static late Box<Record> recordBox;
 
   static Future<void> init() async {
     if (!_kIsWeb) {
@@ -21,7 +27,11 @@ class HiveStorage {
       Hive.init(dir.path);
     }
     Hive.registerAdapter(AppSettingsAdapter());
+    Hive.registerAdapter(LiquidAdapter());
+    Hive.registerAdapter(RecordAdapter());
 
     appSettingsBox = await Hive.openBox<AppSettings>('AppSettings');
+    liquidBox = await Hive.openBox<Liquid>('Liquid');
+    recordBox = await Hive.openBox<Record>('Record');
   }
 }

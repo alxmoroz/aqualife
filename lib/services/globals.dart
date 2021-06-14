@@ -3,9 +3,13 @@
 import 'package:aqualife/generated/l10n.dart';
 import 'package:aqualife/models/app_settings.dart';
 import 'package:aqualife/services/hive_storage.dart';
+import 'package:aqualife/state/liquids_state.dart';
+import 'package:aqualife/state/records_state.dart';
 import 'package:package_info/package_info.dart';
 
 late AppSettings settings;
+late LiquidsState liquidsState;
+late RecordsState recordsState;
 
 S get loc => S.current;
 
@@ -26,13 +30,19 @@ class Globals {
       await HiveStorage.appSettingsBox.add(AppSettings());
     }
 
+    // стейты для типов жидкостей и записей
+    liquidsState = LiquidsState();
+    recordsState = RecordsState();
+    liquidsState.loadLiquids();
+    recordsState.loadRecords();
+
+    //TODO: настройки вынести в стейт приложения
     settings = HiveStorage.appSettingsBox.values.first;
 
     final packageInfo = await PackageInfo.fromPlatform();
     // final savedVersion = settings.version;
     final currentVersion = packageInfo.version;
     settings.version = currentVersion;
-
     // настройки
     await settings.save();
   }
