@@ -1,3 +1,5 @@
+// Copyright (c) 2021. Alexandr Moroz
+
 import 'package:aqualife/models/liquid.dart';
 import 'package:aqualife/services/hive_storage.dart';
 import 'package:hive/hive.dart';

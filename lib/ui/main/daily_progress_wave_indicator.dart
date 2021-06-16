@@ -1,3 +1,5 @@
+// Copyright (c) 2021. Alexandr Moroz
+
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';

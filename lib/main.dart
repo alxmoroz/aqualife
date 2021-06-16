@@ -8,6 +8,7 @@ import 'generated/l10n.dart';
 import 'services/globals.dart';
 import 'ui/components/images.dart';
 import 'ui/main/main_view.dart';
+import 'ui/statistics/statistics_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,9 @@ class App extends StatelessWidget {
         future: _initFuture,
         builder: (_, snapshot) => snapshot.connectionState == ConnectionState.done ? MainView() : SplashScreen(),
       ),
+      routes: {
+        StatisticsView.routeName: (_) => StatisticsView(),
+      },
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

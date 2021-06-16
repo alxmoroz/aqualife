@@ -5,11 +5,12 @@ import 'package:aqualife/models/app_settings.dart';
 import 'package:aqualife/services/hive_storage.dart';
 import 'package:aqualife/state/liquids_state.dart';
 import 'package:aqualife/state/records_state.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 late AppSettings settings;
 late LiquidsState liquidsState;
 late RecordsState recordsState;
+late PackageInfo packageInfo;
 
 S get loc => S.current;
 
@@ -39,7 +40,7 @@ class Globals {
     //TODO: настройки вынести в стейт приложения
     settings = HiveStorage.appSettingsBox.values.first;
 
-    final packageInfo = await PackageInfo.fromPlatform();
+    packageInfo = await PackageInfo.fromPlatform();
     // final savedVersion = settings.version;
     final currentVersion = packageInfo.version;
     settings.version = currentVersion;
