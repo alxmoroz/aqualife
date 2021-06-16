@@ -18,7 +18,7 @@ class MonthSelector extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          Button.icon(chevronBack, recordsState.setPrevMonth),
+          Button.icon(chevronBack, recordsState.canPrevMonth ? recordsState.setPrevMonth : null),
           MediumText(DateFormat.yMMMM().format(recordsState.selectedMonth)),
           Button.icon(chevronForward, recordsState.canNextMonth ? recordsState.setNextMonth : null),
           const Spacer(),
