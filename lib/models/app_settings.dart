@@ -9,4 +9,7 @@ part 'app_settings.g.dart';
 class AppSettings extends HiveObject {
   @HiveField(0, defaultValue: '')
   String version = '';
+
+  @HiveField(1, defaultValue: 'measure_unit_ml')
+  String measureUnitCode = 'measure_unit_ml';
 }

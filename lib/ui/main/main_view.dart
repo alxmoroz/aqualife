@@ -4,11 +4,11 @@ import 'package:aqualife/services/globals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intl/intl.dart';
 
 import '../components/buttons.dart';
 import '../components/colors.dart';
 import '../components/icons.dart';
-import '../components/images.dart';
 import '../components/text/text_widgets.dart';
 import '../statistics/statistics_view.dart';
 import 'daily_progress_wave_indicator.dart';
@@ -34,6 +34,16 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    Widget quantityText(String title) {
+      return Center(
+        child: MediumText(
+          title,
+          size: isTablet ? 65 : 50,
+          color: mainColor,
+        ),
+      );
+    }
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -46,24 +56,21 @@ class _MainViewState extends State<MainView> {
       ),
       drawer: Drawer(
         child: Container(
-          color: CupertinoDynamicColor.resolve(CupertinoColors.secondarySystemBackground, context),
+          color: CupertinoDynamicColor.resolve(backgroundColor, context),
           child: SafeArea(
             child: Column(
               children: [
                 SizedBox(height: cardPadding),
                 ListTile(
-                  leading: chartIcon,
+                  leading: chartIcon(context),
                   title: MediumText(loc.statistics),
-                  trailing: Icon(CupertinoIcons.chevron_forward, color: CupertinoDynamicColor.resolve(darkColor, context)),
+                  trailing: chevronForward,
                   onTap: () => Navigator.of(context).popAndPushNamed(StatisticsView.routeName),
                 ),
                 const Spacer(),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   NormalText(packageInfo.appName, weight: FontWeight.w300),
-                  NormalText(
-                    settings.version,
-                    padding: const EdgeInsets.only(left: 6),
-                  )
+                  NormalText(settings.version, padding: const EdgeInsets.only(left: 6))
                 ]),
               ],
             ),
@@ -71,7 +78,7 @@ class _MainViewState extends State<MainView> {
         ),
       ),
       body: Container(
-        decoration: bgDecoration(context),
+        color: CupertinoDynamicColor.resolve(backgroundColor, context),
         child: Observer(
           builder: (_) => Stack(
             children: [
@@ -82,14 +89,14 @@ class _MainViewState extends State<MainView> {
                   null,
                   () => recordsState.addRecord(quantity: 50),
                   padding: const EdgeInsets.all(30),
-                  child: Container(child: plusIcon(context)),
+                  child: plusIcon(context),
                 ),
               ),
-              Center(
-                child: H3(recordsState.waterQuantityToday.toString(), color: darkColor),
+              quantityText(
+                '${recordsState.waterQuantityToday} ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
               ),
             ],
-          ),
+              ),
         ),
       ),
     );

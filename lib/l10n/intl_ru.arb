@@ -1,5 +1,6 @@
 {
   "@@locale": "ru",
+  "measure_unit_ml": "мл",
   "statistics": "Статистика",
   "today": "Сегодня"
 }

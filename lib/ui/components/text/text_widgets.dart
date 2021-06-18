@@ -14,7 +14,6 @@ class TextShadow {
   final Offset offset;
 
   double get dx => offset.dx;
-
   double get dy => offset.dy;
 }
 
@@ -59,7 +58,7 @@ class NormalText extends StatelessWidget {
     final textStyle = cupertinoTS.copyWith(
       color: CupertinoDynamicColor.maybeResolve(color ?? darkColor, context),
       fontWeight: weight ?? cupertinoTS.fontWeight,
-      fontSize: (size ?? cupertinoTS.fontSize ?? (isTablet ? 20 : 16)) * (sizeScale ?? 1),
+      fontSize: (size ?? cupertinoTS.fontSize ?? (isTablet ? 22 : 18)) * (sizeScale ?? 1),
       height: height ?? cupertinoTS.height,
     );
     return Padding(

@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:aqualife/ui/components/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,14 +39,13 @@ class _DailyProgressWaveIndicatorState extends State<DailyProgressWaveIndicator>
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      // alignment: Alignment.bottomCenter,
       bottom: MediaQuery.of(context).size.height * (min(1, widget.value) - 1),
       width: MediaQuery.of(context).size.width,
       child: ClipPath(
         clipper: WaveClip(),
         child: Container(
           height: MediaQuery.of(context).size.height + 100,
-          color: Colors.lightBlue,
+          color: CupertinoDynamicColor.resolve(tealColor, context),
         ),
       ),
     );

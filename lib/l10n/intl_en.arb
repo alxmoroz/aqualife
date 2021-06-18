@@ -1,5 +1,6 @@
 {
   "@@locale": "en",
+  "measure_unit_ml": "ml",
   "statistics": "Statistics",
   "today": "Today"
 }
