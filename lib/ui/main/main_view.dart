@@ -96,7 +96,7 @@ class _MainViewState extends State<MainView> {
                 '${recordsState.waterQuantityToday} ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
               ),
             ],
-              ),
+          ),
         ),
       ),
     );
