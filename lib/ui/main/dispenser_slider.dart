@@ -46,29 +46,30 @@ class _DispenserSliderState extends State<DispenserSlider> {
           rtl: true,
           jump: true,
           tooltip: FlutterSliderTooltip(disabled: true),
-          handlerHeight: 58,
-          handlerWidth: 120,
+          handlerHeight: 60,
+          handlerWidth: 160,
           handler: FlutterSliderHandler(
             decoration: BoxDecoration(
                 color: CupertinoDynamicColor.resolve(mainColor, context),
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: CupertinoDynamicColor.resolve(tealColor, context), width: 3)),
-            child: H3(
+            child: MediumText(
               '+ $dragValue ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
               color: tealColor,
+              size: 28,
               align: TextAlign.center,
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(6),
             ),
           ),
           handlerAnimation: const FlutterSliderHandlerAnimation(scale: 1),
           trackBar: FlutterSliderTrackBar(
             activeTrackBarHeight: 90,
-            inactiveTrackBarHeight: 4,
+            inactiveTrackBarHeight: 2,
             inactiveTrackBar: BoxDecoration(color: CupertinoDynamicColor.resolve(mainColor, context)),
             activeTrackBar: BoxDecoration(
               color: CupertinoDynamicColor.resolve(tealColor, context),
               border: Border.all(color: CupertinoDynamicColor.resolve(mainColor, context), width: 3),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(14),
             ),
           ),
           hatchMark: FlutterSliderHatchMark(

@@ -35,24 +35,27 @@ abstract class _DispenserStateBase extends State<Dispenser> with Store {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 120,
       height: MediaQuery.of(context).size.height * 0.9,
       child: Observer(
         builder: (_) => Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Expanded(
-              child: showSlider
-                  ? DispenserSlider(
-                      value: settings.lastShotValue.toDouble(),
-                      onDragCompleted: (int _, dynamic lowerValue, dynamic __) {
-                        if (lowerValue is num) {
-                          recordsState.addRecord(quantity: lowerValue.toInt());
-                          setSlider(false);
-                        }
-                      },
-                    )
-                  : Container(),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (Widget child, Animation<double> animation) => SizeTransition(sizeFactor: animation, child: child),
+                child: showSlider
+                    ? DispenserSlider(
+                        value: settings.lastShotValue.toDouble(),
+                        onDragCompleted: (int _, dynamic lowerValue, dynamic __) {
+                          if (lowerValue is num) {
+                            recordsState.addRecord(quantity: lowerValue.toInt());
+                            setSlider(false);
+                          }
+                        },
+                      )
+                    : Container(),
+              ),
             ),
             Button.icon(
               Transform.rotate(angle: (showSlider ? pi : 0) / 4, child: plusIcon(context)),
