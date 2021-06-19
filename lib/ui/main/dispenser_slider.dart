@@ -47,16 +47,17 @@ class _DispenserSliderState extends State<DispenserSlider> {
           jump: true,
           tooltip: FlutterSliderTooltip(disabled: true),
           handlerHeight: 60,
-          handlerWidth: 160,
+          handlerWidth: 170,
           handler: FlutterSliderHandler(
             decoration: BoxDecoration(
                 color: CupertinoDynamicColor.resolve(mainColor, context),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: CupertinoDynamicColor.resolve(tealColor, context), width: 3)),
-            child: MediumText(
+            child: NormalText(
               '+ $dragValue ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
               color: tealColor,
-              size: 28,
+              size: 30,
+              weight: FontWeight.bold,
               align: TextAlign.center,
               padding: const EdgeInsets.all(6),
             ),
