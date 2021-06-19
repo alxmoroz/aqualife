@@ -83,18 +83,6 @@ class NormalText extends StatelessWidget {
   }
 }
 
-class SmallText extends NormalText {
-  const SmallText(String text, {Color? color, FontWeight? weight, TextAlign? align, EdgeInsets? padding})
-      : super(
-          text,
-          color: color ?? CupertinoColors.systemGrey,
-          weight: weight,
-          sizeScale: 0.85,
-          align: align,
-          padding: padding,
-        );
-}
-
 class LightText extends NormalText {
   const LightText(String text, {double? size, Color? color, FontWeight? weight, TextAlign? align, EdgeInsets? padding, double? sizeScale})
       : super(
@@ -129,7 +117,7 @@ class H3 extends MediumText {
           text,
           color: color,
           weight: weight,
-          sizeScale: 1.12,
+          sizeScale: 1.2,
           align: align,
           padding: padding,
           shadow: shadow,

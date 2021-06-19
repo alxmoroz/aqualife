@@ -1,6 +1,7 @@
 // Copyright (c) 2021. Alexandr Moroz
 
 import 'package:aqualife/services/globals.dart';
+import 'package:aqualife/ui/main/dispenser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -11,7 +12,7 @@ import '../components/colors.dart';
 import '../components/icons.dart';
 import '../components/text/text_widgets.dart';
 import '../statistics/statistics_view.dart';
-import 'daily_progress_wave_indicator.dart';
+import 'daily_progress_indicator.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -36,11 +37,7 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     Widget quantityText(String title) {
       return Center(
-        child: MediumText(
-          title,
-          size: isTablet ? 65 : 50,
-          color: mainColor,
-        ),
+        child: MediumText(title, size: isTablet ? 65 : 50, color: mainColor),
       );
     }
 
@@ -60,17 +57,17 @@ class _MainViewState extends State<MainView> {
           child: SafeArea(
             child: Column(
               children: [
-                SizedBox(height: cardPadding),
+                SizedBox(height: sidePadding),
                 ListTile(
                   leading: chartIcon(context),
                   title: MediumText(loc.statistics),
-                  trailing: chevronForward,
+                  trailing: chevronForwardIcon(context, color: darkColor),
                   onTap: () => Navigator.of(context).popAndPushNamed(StatisticsView.routeName),
                 ),
                 const Spacer(),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  NormalText(packageInfo.appName, weight: FontWeight.w300),
-                  NormalText(settings.version, padding: const EdgeInsets.only(left: 6))
+                  LightText(packageInfo.appName),
+                  NormalText(settings.version, padding: const EdgeInsets.only(left: 6)),
                 ]),
               ],
             ),
@@ -82,18 +79,13 @@ class _MainViewState extends State<MainView> {
         child: Observer(
           builder: (_) => Stack(
             children: [
-              DailyProgressWaveIndicator(recordsState.waterQuantityToday / recordsState.dayQuota),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Button(
-                  null,
-                  () => recordsState.addRecord(quantity: 50),
-                  padding: const EdgeInsets.all(30),
-                  child: plusIcon(context),
-                ),
-              ),
+              DailyProgressIndicator(recordsState.waterQuantityToday / recordsState.dayQuota),
               quantityText(
                 '${recordsState.waterQuantityToday} ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Dispenser(),
               ),
             ],
           ),

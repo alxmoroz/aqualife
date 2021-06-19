@@ -14,6 +14,11 @@ Color get mainColor => const CupertinoDynamicColor.withBrightness(
       darkColor: Color.fromARGB(255, 90, 200, 250),
     );
 
+Color get mainColorBg => const CupertinoDynamicColor.withBrightness(
+      color: Color.fromARGB(50, 0, 113, 164),
+      darkColor: Color.fromARGB(50, 90, 200, 250),
+    );
+
 Color get backgroundColor => CupertinoColors.systemGrey5;
 
 Color get navbarBgColor => CupertinoColors.systemFill;

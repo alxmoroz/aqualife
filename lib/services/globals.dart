@@ -19,7 +19,7 @@ S get loc => S.current;
 bool get isTablet => false;
 
 // double get cardPadding => isTablet ? 20 : 10;
-double get cardPadding => 10;
+double get sidePadding => 12;
 
 class Globals {
   static Future<void> initialize() async {

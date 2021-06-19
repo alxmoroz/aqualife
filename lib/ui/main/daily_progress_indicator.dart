@@ -26,20 +26,16 @@ class WaveClip extends CustomClipper<Path> {
   }
 }
 
-class DailyProgressWaveIndicator extends StatefulWidget {
-  const DailyProgressWaveIndicator(this.value);
+class DailyProgressIndicator extends StatelessWidget {
+  const DailyProgressIndicator(this.value);
 
   final double value;
 
   @override
-  _DailyProgressWaveIndicatorState createState() => _DailyProgressWaveIndicatorState();
-}
-
-class _DailyProgressWaveIndicatorState extends State<DailyProgressWaveIndicator> {
-  @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: MediaQuery.of(context).size.height * (min(1, widget.value) - 1),
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 1000),
+      bottom: MediaQuery.of(context).size.height * (min(1, value) - 1),
       width: MediaQuery.of(context).size.width,
       child: ClipPath(
         clipper: WaveClip(),

@@ -12,4 +12,7 @@ class AppSettings extends HiveObject {
 
   @HiveField(1, defaultValue: 'measure_unit_ml')
   String measureUnitCode = 'measure_unit_ml';
+
+  @HiveField(2, defaultValue: 250)
+  num lastShotValue = 250;
 }

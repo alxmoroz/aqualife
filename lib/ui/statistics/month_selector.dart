@@ -18,14 +18,14 @@ class MonthSelector extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          if (recordsState.canPrevMonth) Button.icon(chevronBack, recordsState.setPrevMonth),
+          recordsState.canPrevMonth ? Button.icon(chevronBackIcon(context), recordsState.setPrevMonth) : const SizedBox(width: 44),
           MediumText(DateFormat.yMMMM().format(recordsState.selectedMonth)),
-          if (recordsState.canNextMonth) Button.icon(chevronForward, recordsState.setNextMonth),
+          recordsState.canNextMonth ? Button.icon(chevronForwardIcon(context), recordsState.setNextMonth) : const SizedBox(width: 44),
           const Spacer(),
           Button(
             recordsState.canPrevMonth || recordsState.canNextMonth ? loc.today : '',
             recordsState.setCurrentMonth,
-            padding: EdgeInsets.only(right: cardPadding),
+            padding: EdgeInsets.only(right: sidePadding),
           ),
         ],
       ),

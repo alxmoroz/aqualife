@@ -3,13 +3,13 @@
 import 'dart:ui';
 
 import 'package:aqualife/services/globals.dart';
-import 'package:aqualife/ui/components/colors.dart';
-import 'package:aqualife/ui/components/icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
+import '../components/colors.dart';
+import '../components/icons.dart';
 import '../components/material_wrapper.dart';
 import '../components/navbar.dart';
 import '../components/text/text_widgets.dart';
@@ -82,21 +82,18 @@ class StatisticsView extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: ClipRect(
-                // child: SafeArea(
-                //   top: false,
                 child: Container(
                   color: CupertinoDynamicColor.resolve(navbarBgColor, context),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
                     child: ListTile(
-                      contentPadding: EdgeInsets.only(bottom: cardPadding),
+                      contentPadding: EdgeInsets.only(bottom: sidePadding),
                       title: homeIcon(context),
                       onTap: () => Navigator.of(context).pop(),
                     ),
                   ),
                 ),
               ),
-              // ),
             ),
           ],
         ),
