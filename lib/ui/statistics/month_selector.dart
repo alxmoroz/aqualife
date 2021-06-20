@@ -11,6 +11,8 @@ import '../components/icons.dart';
 import '../components/text/text_widgets.dart';
 
 class MonthSelector extends StatelessWidget {
+  bool get _showTodayBtn => recordsState.canPrevMonth || recordsState.canNextMonth;
+
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -22,13 +24,9 @@ class MonthSelector extends StatelessWidget {
           MediumText(DateFormat.yMMMM().format(recordsState.selectedMonth)),
           recordsState.canNextMonth ? Button.icon(chevronForwardIcon(context), recordsState.setNextMonth) : const SizedBox(width: 44),
           const Spacer(),
-          Button(
-            recordsState.canPrevMonth || recordsState.canNextMonth ? loc.today : '',
-            recordsState.setCurrentMonth,
-            padding: EdgeInsets.only(right: sidePadding),
-          ),
+          if (_showTodayBtn) Button(loc.today, recordsState.setCurrentMonth, padding: EdgeInsets.only(right: sidePadding)),
         ],
-      ),
+          ),
     );
   }
 }

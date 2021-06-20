@@ -2,9 +2,10 @@
 
 import 'dart:math';
 
-import 'package:aqualife/ui/components/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../components/colors.dart';
 
 class WaveClip extends CustomClipper<Path> {
   @override
