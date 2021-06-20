@@ -26,7 +26,7 @@ class MonthSelector extends StatelessWidget {
           const Spacer(),
           if (_showTodayBtn) Button(loc.today, recordsState.setCurrentMonth, padding: EdgeInsets.only(right: sidePadding)),
         ],
-          ),
+      ),
     );
   }
 }
