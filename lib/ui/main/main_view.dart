@@ -1,5 +1,6 @@
 // Copyright (c) 2021. Alexandr Moroz
 
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:aqualife/services/globals.dart';
@@ -16,48 +17,28 @@ import '../main/dispenser_slider.dart';
 import 'daily_progress_indicator.dart';
 import 'drawer.dart';
 
-class MainView extends StatelessWidget {
-  void showSliderModal(BuildContext context) {
-    showCupertinoModalPopup<void>(
-      context: context,
-      filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
-      builder: (BuildContext context) => Container(
-        color: navbarBgColor,
-        child: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-              Expanded(
-                child: DispenserSlider(
-                  value: settings.lastShotValue,
-                  onDragCompleted: (int _, dynamic lowerValue, dynamic __) {
-                    if (lowerValue is num) {
-                      recordsState.addRecord(quantity: lowerValue.toInt());
-                      Navigator.of(context).pop();
-                    }
-                  },
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-              Button.icon(
-                closeIcon(context),
-                () => Navigator.of(context).pop(),
-              ),
-            ],
-          ),
-        ),
-      ),
+class MainView extends StatefulWidget {
+  @override
+  _MainViewState createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  bool showSlider = false;
+
+  static const Duration duration = Duration(milliseconds: 300);
+
+  void toggleSliderVisibility() => setState(() {
+        showSlider = !showSlider;
+      });
+
+  Widget quantityText(String title) {
+    return Center(
+      child: MediumText(title, size: isTablet ? 65 : 50, color: mainColor),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget quantityText(String title) {
-      return Center(
-        child: MediumText(title, size: isTablet ? 65 : 50, color: mainColor),
-      );
-    }
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -78,11 +59,42 @@ class MainView extends StatelessWidget {
               quantityText(
                 '${recordsState.waterQuantityToday} ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
               ),
-              //TODO : слайдер
+              if (showSlider) BackdropFilter(filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9), child: Container()),
+              AnimatedSwitcher(
+                duration: duration,
+                child: showSlider
+                    ? Container(
+                        // TODO: цвет можно подобрать как в АктМониторе для таббара
+                        color: CupertinoDynamicColor.resolve(navbarBgColor, context),
+                        child: Column(
+                          children: [
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                            Expanded(
+                              child: DispenserSlider(
+                                value: settings.lastShotValue,
+                                onDragCompleted: (int _, dynamic lowerValue, dynamic __) {
+                                  if (lowerValue is num) {
+                                    recordsState.addRecord(quantity: lowerValue.toInt());
+                                  }
+                                  toggleSliderVisibility();
+                                },
+                              ),
+                            ),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                          ],
+                        ),
+                      )
+                    : null,
+              ),
               SafeArea(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Button.icon(plusIcon(context), () => showSliderModal(context)),
+                  child: AnimatedContainer(
+                    duration: duration,
+                    transformAlignment: Alignment.center,
+                    transform: Matrix4.rotationZ(showSlider ? pi / 4 : 0),
+                    child: Button.icon(plusIcon(context), () => toggleSliderVisibility()),
+                  ),
                 ),
               ),
             ],
