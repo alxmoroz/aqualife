@@ -31,6 +31,12 @@ Widget plusIcon(BuildContext context, {Color? color, double? size}) => Icon(
       color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
     );
 
+Widget closeIcon(BuildContext context, {Color? color, double? size}) => Icon(
+      CupertinoIcons.clear_circled_solid,
+      size: size ?? 96,
+      color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
+    );
+
 Widget homeIcon(BuildContext context, {Color? color, double? size}) => Icon(
       CupertinoIcons.home,
       size: size ?? 32,

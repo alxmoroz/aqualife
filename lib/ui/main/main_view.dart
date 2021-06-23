@@ -1,5 +1,7 @@
 // Copyright (c) 2021. Alexandr Moroz
 
+import 'dart:ui';
+
 import 'package:aqualife/services/globals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,27 +12,42 @@ import '../components/buttons.dart';
 import '../components/colors.dart';
 import '../components/icons.dart';
 import '../components/text/text_widgets.dart';
+import '../main/dispenser_slider.dart';
 import 'daily_progress_indicator.dart';
-import 'dispenser.dart';
 import 'drawer.dart';
 
-class MainView extends StatefulWidget {
-  @override
-  _MainViewState createState() => _MainViewState();
-}
-
-class _MainViewState extends State<MainView> {
-  void updateState() {}
-
-  @override
-  void initState() {
-    updateState();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+class MainView extends StatelessWidget {
+  void showSliderModal(BuildContext context) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
+      builder: (BuildContext context) => Container(
+        color: navbarBgColor,
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+              Expanded(
+                child: DispenserSlider(
+                  value: settings.lastShotValue,
+                  onDragCompleted: (int _, dynamic lowerValue, dynamic __) {
+                    if (lowerValue is num) {
+                      recordsState.addRecord(quantity: lowerValue.toInt());
+                      Navigator.of(context).pop();
+                    }
+                  },
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+              Button.icon(
+                closeIcon(context),
+                () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -61,9 +78,12 @@ class _MainViewState extends State<MainView> {
               quantityText(
                 '${recordsState.waterQuantityToday} ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Dispenser(),
+              //TODO : слайдер
+              SafeArea(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Button.icon(plusIcon(context), () => showSliderModal(context)),
+                ),
               ),
             ],
           ),

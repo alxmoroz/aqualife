@@ -1,109 +1,89 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'dart:ui';
-
 import 'package:aqualife/services/globals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../components/am_slider.dart';
 import '../components/colors.dart';
 import '../components/text/text_widgets.dart';
-import '../components/xslider_ns.dart';
 
-class DispenserSlider extends StatefulWidget {
+class DispenserSlider extends StatelessWidget {
   const DispenserSlider({required this.value, required this.onDragCompleted});
 
   @protected
-  final double value;
+  final num value;
   @protected
   final Function(int, dynamic, dynamic) onDragCompleted;
 
-  @override
-  _DispenserSliderState createState() => _DispenserSliderState();
-}
+  List<AMSliderFixedValue> get steps => [
+        AMSliderFixedValue(percent: 5, value: 50),
+        AMSliderFixedValue(percent: 12, value: 125),
+        AMSliderFixedValue(percent: 25, value: 250),
+        AMSliderFixedValue(percent: 32, value: 330),
+        AMSliderFixedValue(percent: 48, value: 500),
+        AMSliderFixedValue(percent: 62, value: 650),
+        AMSliderFixedValue(percent: 72, value: 750),
+        AMSliderFixedValue(percent: 100, value: 1000),
+      ];
 
-class _DispenserSliderState extends State<DispenserSlider> {
-  late int dragValue;
-
-  @override
-  void initState() {
-    dragValue = widget.value.toInt();
-    super.initState();
-  }
+  int percentByValue(num v) => steps.firstWhere((s) => s.value == v).percent;
 
   @override
   Widget build(BuildContext context) {
-    final List<int> steps = [50, 125, 250, 330, 500, 650, 750, 1000];
+    final borderSide = BorderSide(color: CupertinoDynamicColor.resolve(mainColor, context), width: 2);
 
-    return Container(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
-        child: FlutterSlider(
-          min: 0,
-          max: 1000,
-          step: const FlutterSliderStep(step: 10),
-          rtl: true,
-          jump: true,
-          tooltip: FlutterSliderTooltip(disabled: true),
-          handlerHeight: 60,
-          handlerWidth: 170,
-          handler: FlutterSliderHandler(
-            decoration: BoxDecoration(
-                color: CupertinoDynamicColor.resolve(mainColor, context),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: CupertinoDynamicColor.resolve(tealColor, context), width: 3)),
-            child: NormalText(
-              '+ $dragValue ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
-              color: tealColor,
-              size: 30,
-              weight: FontWeight.bold,
-              align: TextAlign.center,
-              padding: const EdgeInsets.all(6),
-            ),
-          ),
-          handlerAnimation: const FlutterSliderHandlerAnimation(scale: 1),
-          trackBar: FlutterSliderTrackBar(
-            activeTrackBarHeight: 90,
-            inactiveTrackBarHeight: 2,
-            inactiveTrackBar: BoxDecoration(color: CupertinoDynamicColor.resolve(mainColor, context)),
-            activeTrackBar: BoxDecoration(
-              color: CupertinoDynamicColor.resolve(tealColor, context),
-              border: Border.all(color: CupertinoDynamicColor.resolve(mainColor, context), width: 3),
-              borderRadius: BorderRadius.circular(14),
-            ),
-          ),
-          hatchMark: FlutterSliderHatchMark(
-            labels: steps
-                .map(
-                  (v) => FlutterSliderHatchMarkLabel(
-                    percent: v / 10,
-                    label: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: CupertinoDynamicColor.resolve(mainColor, context)),
-                        borderRadius: BorderRadius.circular(10),
-                        color: CupertinoDynamicColor.resolve(tealColor, context),
-                      ),
-                      child: NormalText(
-                        '$v ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
-                        color: mainColor,
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      ),
-                    ),
-                  ),
-                )
-                .toList(growable: false),
-          ),
-          values: [dragValue.toDouble()],
-          axis: Axis.vertical,
-          onDragCompleted: widget.onDragCompleted,
-          onDragging: (_, dynamic lowerValue, dynamic __) {
-            if (lowerValue is num && lowerValue != dragValue) {
-              setState(() => dragValue = lowerValue.toInt());
-            }
-          },
+    final sliderWidth = MediaQuery.of(context).size.shortestSide * 0.4;
+    final borderR = BorderRadius.circular(40);
+
+    return AMSlider(
+      fixedValues: steps,
+      rtl: true,
+      jump: true,
+      tooltip: AMSliderTooltip(disabled: true),
+      handlerHeight: 0,
+      handlerWidth: sliderWidth,
+      handler: AMSliderHandler(
+        decoration: BoxDecoration(
+          color: CupertinoDynamicColor.resolve(mainColor, context),
+          borderRadius: BorderRadius.circular(4),
+          border: Border.fromBorderSide(borderSide),
+        ),
+        child: Container(),
+      ),
+      handlerAnimation: const AMSliderHandlerAnimation(scale: 1),
+      trackBar: AMSliderTrackBar(
+        activeTrackBarHeight: sliderWidth,
+        inactiveTrackBarHeight: sliderWidth,
+        inactiveTrackBar: BoxDecoration(
+          color: Colors.transparent,
+          border: Border.fromBorderSide(borderSide),
+          borderRadius: borderR,
+        ),
+        activeTrackBar: BoxDecoration(
+          color: CupertinoDynamicColor.resolve(tealColor, context),
+          border: Border.fromBorderSide(borderSide),
+          borderRadius: borderR,
         ),
       ),
+      hatchMark: AMSliderHatchMark(
+        labels: steps
+            .map(
+              (s) => AMSliderHatchMarkLabel(
+                percent: s.percent,
+                label: NormalText(
+                  '— ${s.value} ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)} —',
+                  color: mainColor,
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                ),
+              ),
+            )
+            .toList(growable: false),
+      ),
+      values: [percentByValue(value).toDouble()],
+      axis: Axis.vertical,
+      onDragCompleted: onDragCompleted,
     );
   }
 }
