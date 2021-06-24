@@ -34,6 +34,6 @@ CupertinoNavigationBar navBar(
             : null,
     trailing: trailing != null ? mQuery(trailing) : null,
     padding: const EdgeInsetsDirectional.only(start: 0),
-    backgroundColor: bgColor ?? navbarBgColor,
+    backgroundColor: bgColor ?? mainFillColor,
   );
 }

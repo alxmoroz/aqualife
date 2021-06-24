@@ -1,5 +1,6 @@
 // Copyright (c) 2021. Alexandr Moroz
 
+import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
@@ -13,7 +14,7 @@ import '../components/buttons.dart';
 import '../components/colors.dart';
 import '../components/icons.dart';
 import '../components/text/text_widgets.dart';
-import '../main/dispenser_slider.dart';
+import '../main/dispenser.dart';
 import 'daily_progress_indicator.dart';
 import 'drawer.dart';
 
@@ -23,17 +24,17 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  bool showSlider = false;
-
   static const Duration duration = Duration(milliseconds: 300);
+  static const Duration shortDuration = Duration(milliseconds: 150);
 
-  void toggleSliderVisibility() => setState(() {
-        showSlider = !showSlider;
-      });
+  // num get lastShotValue => settings.lastShotValue;
+  bool showDispenser = false;
+
+  void toggleDispenser() => setState(() => showDispenser = !showDispenser);
 
   Widget quantityText(String title) {
     return Center(
-      child: MediumText(title, size: isTablet ? 65 : 50, color: mainColor),
+      child: MediumText(title, size: isTablet ? 80 : 65, color: mainColor),
     );
   }
 
@@ -59,41 +60,49 @@ class _MainViewState extends State<MainView> {
               quantityText(
                 '${recordsState.waterQuantityToday} ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
               ),
-              if (showSlider) BackdropFilter(filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9), child: Container()),
-              AnimatedSwitcher(
-                duration: duration,
-                child: showSlider
-                    ? Container(
-                        // TODO: цвет можно подобрать как в АктМониторе для таббара
-                        color: CupertinoDynamicColor.resolve(navbarBgColor, context),
-                        child: Column(
-                          children: [
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
-                            Expanded(
-                              child: DispenserSlider(
-                                value: settings.lastShotValue,
-                                onDragCompleted: (int _, dynamic lowerValue, dynamic __) {
-                                  if (lowerValue is num) {
-                                    recordsState.addRecord(quantity: lowerValue.toInt());
-                                  }
-                                  toggleSliderVisibility();
-                                },
-                              ),
-                            ),
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-                          ],
-                        ),
-                      )
-                    : null,
-              ),
+              if (showDispenser)
+                BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
+                  child: GestureDetector(
+                    onTap: toggleDispenser,
+                    child: Container(color: CupertinoDynamicColor.resolve(mainFillColor, context)),
+                  ),
+                ),
               SafeArea(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: AnimatedContainer(
-                    duration: duration,
-                    transformAlignment: Alignment.center,
-                    transform: Matrix4.rotationZ(showSlider ? pi / 4 : 0),
-                    child: Button.icon(plusIcon(context), () => toggleSliderVisibility()),
+                  child: Column(
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                      Expanded(
+                        child: SizedBox(
+                          width: 140,
+                          child: AnimatedOpacity(
+                            duration: duration,
+                            opacity: showDispenser ? 1 : 0,
+                            child: Dispenser(
+                              value: 0, //lastShotValue,
+                              onDragCompleted: (int _, dynamic lowerValue, dynamic __) async {
+                                if (!showDispenser) {
+                                  return;
+                                }
+                                if (lowerValue is num) {
+                                  await recordsState.addRecord(quantity: lowerValue.toInt());
+                                }
+                                Timer(shortDuration, toggleDispenser);
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: sidePadding),
+                      AnimatedContainer(
+                        duration: duration,
+                        transformAlignment: Alignment.center,
+                        transform: Matrix4.rotationZ(showDispenser ? pi / 4 : 0),
+                        child: Button.icon(plusIcon(context), toggleDispenser),
+                      ),
+                    ],
                   ),
                 ),
               ),

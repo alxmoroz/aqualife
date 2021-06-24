@@ -29,7 +29,7 @@ class StatisticsView extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: ClipRect(
                 child: Container(
-                  color: CupertinoDynamicColor.resolve(navbarBgColor, context),
+                  color: CupertinoDynamicColor.resolve(mainFillColor, context),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
                     child: ListTile(

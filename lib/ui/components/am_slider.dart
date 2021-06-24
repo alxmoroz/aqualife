@@ -473,6 +473,42 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
 
     double tappedPositionWithPadding = 0;
 
+    void pointerDragged(PointerEvent pointer) {
+      __dragging = true;
+
+      if (_slidingByActiveTrackBar) {
+        _trackBarSlideCallDragStated(0);
+        _leftHandlerMove(pointer, lockedHandlersDragOffset: __lockedHandlersDragOffset);
+      } else {
+        tappedPositionWithPadding = _distance();
+
+        if (widget.rangeSlider) {
+          if (_leftTapAndSlide) {
+            _trackBarSlideCallDragStated(0);
+            if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
+              _leftTooltipOpacity = 1;
+              _leftTooltipAnimationController.forward();
+            }
+            _leftHandlerMove(pointer, tappedPositionWithPadding: tappedPositionWithPadding);
+          } else {
+            _trackBarSlideCallDragStated(1);
+            if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
+              _rightTooltipOpacity = 1;
+              _rightTooltipAnimationController.forward();
+            }
+            _rightHandlerMove(pointer, tappedPositionWithPadding: tappedPositionWithPadding);
+          }
+        } else {
+          _trackBarSlideCallDragStated(1);
+          if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
+            _rightTooltipOpacity = 1;
+            _rightTooltipAnimationController.forward();
+          }
+          _rightHandlerMove(pointer, tappedPositionWithPadding: tappedPositionWithPadding);
+        }
+      }
+    }
+
     items.add(Positioned(
         left: 0,
         right: 0,
@@ -513,39 +549,7 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
               setState(() {});
             },
             onPointerMove: (_) {
-              __dragging = true;
-
-              if (_slidingByActiveTrackBar) {
-                _trackBarSlideCallDragStated(0);
-                _leftHandlerMove(_, lockedHandlersDragOffset: __lockedHandlersDragOffset);
-              } else {
-                tappedPositionWithPadding = _distance();
-
-                if (widget.rangeSlider) {
-                  if (_leftTapAndSlide) {
-                    _trackBarSlideCallDragStated(0);
-                    if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
-                      _leftTooltipOpacity = 1;
-                      _leftTooltipAnimationController.forward();
-                    }
-                    _leftHandlerMove(_, tappedPositionWithPadding: tappedPositionWithPadding);
-                  } else {
-                    _trackBarSlideCallDragStated(1);
-                    if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
-                      _rightTooltipOpacity = 1;
-                      _rightTooltipAnimationController.forward();
-                    }
-                    _rightHandlerMove(_, tappedPositionWithPadding: tappedPositionWithPadding);
-                  }
-                } else {
-                  _trackBarSlideCallDragStated(1);
-                  if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
-                    _rightTooltipOpacity = 1;
-                    _rightTooltipAnimationController.forward();
-                  }
-                  _rightHandlerMove(_, tappedPositionWithPadding: tappedPositionWithPadding);
-                }
-              }
+              pointerDragged(_);
             },
             onPointerDown: (_) {
               _leftTapAndSlide = false;
@@ -603,7 +607,6 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
                   __lockedHandlersDragOffset = (_leftHandlerYPosition! + _containerTop - _.position.dy).abs();
                 }
               }
-//              }
 
               if (_ignoreSteps.isEmpty) {
                 if ((widget.lockHandlers || __lockedHandlersDragOffset > 0) && !_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
@@ -620,6 +623,8 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
               }
 
               setState(() {});
+
+              pointerDragged(_);
             },
             child: Draggable(
               axis: widget.axis,

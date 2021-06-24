@@ -14,25 +14,14 @@ Widget chevronForwardIcon(BuildContext context, {Color? color}) => Icon(
       color: CupertinoDynamicColor.maybeResolve(color, context),
     );
 
-Widget chartIcon(BuildContext context, {Color? color}) => Icon(
+Widget chartIcon(BuildContext context, {Color? color, double? size}) => Icon(
       CupertinoIcons.chart_bar_alt_fill,
-      color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
-    );
-
-Widget menuIcon(BuildContext context, {Color? color, double? size}) => Icon(
-      CupertinoIcons.bars,
-      size: size ?? 42,
+      size: size ?? 32,
       color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
     );
 
 Widget plusIcon(BuildContext context, {Color? color, double? size}) => Icon(
       CupertinoIcons.plus_circle_fill,
-      size: size ?? 96,
-      color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
-    );
-
-Widget closeIcon(BuildContext context, {Color? color, double? size}) => Icon(
-      CupertinoIcons.clear_circled_solid,
       size: size ?? 96,
       color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
     );

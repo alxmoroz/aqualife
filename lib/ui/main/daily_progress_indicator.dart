@@ -36,13 +36,13 @@ class DailyProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 1000),
-      bottom: MediaQuery.of(context).size.height * (min(1, value) - 1),
+      bottom: MediaQuery.of(context).size.height * (min(0.85, value) - 1),
       width: MediaQuery.of(context).size.width,
       child: ClipPath(
         clipper: WaveClip(),
         child: Container(
           height: MediaQuery.of(context).size.height + 100,
-          color: CupertinoDynamicColor.resolve(tealColor, context),
+          color: CupertinoDynamicColor.resolve(secondaryColor, context),
         ),
       ),
     );

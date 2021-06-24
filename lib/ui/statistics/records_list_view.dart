@@ -42,7 +42,7 @@ class RecordsListView extends StatelessWidget {
             child: Stack(alignment: Alignment.centerLeft, children: [
               LinearProgressIndicator(
                 value: value / recordsState.dayQuota,
-                color: CupertinoDynamicColor.resolve(tealColor, context),
+                color: CupertinoDynamicColor.resolve(secondaryColor, context),
                 minHeight: 28,
                 backgroundColor: Colors.transparent,
               ),

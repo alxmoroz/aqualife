@@ -65,6 +65,9 @@ abstract class _RecordsStateBase with Store {
       await HiveStorage.recordBox.add(record);
     }
 
+    settings.lastShotValue = quantity;
+    await settings.save();
+
     loadRecords();
   }
 
