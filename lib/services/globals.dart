@@ -14,6 +14,10 @@ late PackageInfo packageInfo;
 
 S get loc => S.current;
 
+// TODO: перенести взаимодействие с БД в стейты
+
+// TODO: все глабальные штуки перенести в стейт приложения
+
 //TODO: UI-constants
 // bool get isTablet => iosInfo.model == 'iPad';
 bool get isTablet => false;
@@ -21,30 +25,26 @@ bool get isTablet => false;
 // double get cardPadding => isTablet ? 20 : 10;
 double get sidePadding => 12;
 
-class Globals {
-  static Future<void> initialize() async {
-    await HiveStorage.init();
+Future<void> initGlobals() async {
+  await HiveStorage.init();
 
-    // первый запуск приложения
-    final firstLaunch = HiveStorage.appSettingsBox.values.isEmpty;
-    if (firstLaunch) {
-      await HiveStorage.appSettingsBox.add(AppSettings());
-    }
-
-    // стейты для типов жидкостей и записей
-    liquidsState = LiquidsState();
-    recordsState = RecordsState();
-    liquidsState.loadLiquids();
-    recordsState.loadRecords();
-
-    //TODO: настройки вынести в стейт приложения
-    settings = HiveStorage.appSettingsBox.values.first;
-
-    packageInfo = await PackageInfo.fromPlatform();
-    // final savedVersion = settings.version;
-    final currentVersion = packageInfo.version;
-    settings.version = currentVersion;
-    // настройки
-    await settings.save();
+  if (HiveStorage.appSettingsBox.isEmpty) {
+    await HiveStorage.appSettingsBox.add(AppSettings());
   }
+  settings = HiveStorage.appSettingsBox.values.first;
+
+  // типы жидкостей
+  liquidsState = LiquidsState();
+  liquidsState.loadLiquids();
+
+  // записи
+  recordsState = RecordsState();
+  recordsState.loadRecords();
+
+  // версия приложения
+  packageInfo = await PackageInfo.fromPlatform();
+  // final savedVersion = settings.version;
+  final currentVersion = packageInfo.version;
+  settings.version = currentVersion;
+  await settings.save();
 }

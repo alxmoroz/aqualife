@@ -1,3 +1,5 @@
+// Copyright (c) 2021. Alexandr Moroz
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -8,34 +10,34 @@ class AMSlider extends StatefulWidget {
       this.max,
       required this.values,
       this.fixedValues,
-      this.axis = Axis.horizontal,
-      this.handler,
-      this.rightHandler,
-      this.handlerHeight,
-      this.handlerWidth,
-      this.onDragStarted,
-      this.onDragCompleted,
-      this.onDragging,
-      this.rangeSlider = false,
-      this.rtl = false,
-      this.jump = false,
-      this.ignoreSteps = const [],
-      this.disabled = false,
-      this.touchSize,
-      this.visibleTouchArea = false,
-      this.minimumDistance = 0,
-      this.maximumDistance = 0,
-      this.tooltip,
-      this.trackBar = const AMSliderTrackBar(),
-      this.handlerAnimation = const AMSliderHandlerAnimation(),
-      this.selectByTap = true,
-      this.step = const AMSliderStep(),
-      this.hatchMark,
-      this.centeredOrigin = false,
-      this.lockHandlers = false,
-      this.lockDistance,
-      this.decoration,
-      this.foregroundDecoration})
+    this.axis = Axis.horizontal,
+    this.handler,
+    this.rightHandler,
+    this.handlerHeight,
+    this.handlerWidth,
+    this.onDragStarted,
+    this.onDragCompleted,
+    this.onDragging,
+    this.rangeSlider = false,
+    this.rtl = false,
+    this.jump = false,
+    this.ignoreSteps = const [],
+    this.disabled = false,
+    this.touchSize,
+    this.visibleTouchArea = false,
+    this.minimumDistance = 0,
+    this.maximumDistance = 0,
+    this.tooltip,
+    this.trackBar = const AMSliderTrackBar(),
+    this.handlerAnimation = const AMSliderHandlerAnimation(),
+    this.selectByTap = true,
+    this.step = const AMSliderStep(),
+    this.hatchMark,
+    this.centeredOrigin = false,
+    this.lockHandlers = false,
+    this.lockDistance,
+    this.decoration,
+    this.foregroundDecoration})
       : assert(touchSize == null || (touchSize >= 5 && touchSize <= 50)),
         assert((ignoreSteps.isNotEmpty && step.rangeList == null) || (ignoreSteps.isEmpty)),
         assert((step.rangeList != null && minimumDistance == 0 && maximumDistance == 0) ||
@@ -118,8 +120,7 @@ class AMSliderHandler {
 }
 
 class AMSliderHandlerAnimation {
-  const AMSliderHandlerAnimation(
-      {this.curve = Curves.elasticOut, this.reverseCurve, this.duration = const Duration(milliseconds: 700), this.scale = 1.3});
+  const AMSliderHandlerAnimation({this.curve = Curves.elasticOut, this.reverseCurve, this.duration = const Duration(milliseconds: 700), this.scale = 1.3});
 
   final Curve curve;
   final Curve? reverseCurve;
@@ -128,17 +129,16 @@ class AMSliderHandlerAnimation {
 }
 
 class AMSliderHatchMark {
-  AMSliderHatchMark(
-      {this.disabled = false,
-      this.density = 1,
-      this.linesDistanceFromTrackBar,
-      this.labelsDistanceFromTrackBar,
-      this.labels,
-      this.smallLine,
-      this.bigLine,
-      this.linesAlignment = AMSliderHatchMarkAlignment.right,
-      this.labelBox,
-      this.displayLines})
+  AMSliderHatchMark({this.disabled = false,
+    this.density = 1,
+    this.linesDistanceFromTrackBar,
+    this.labelsDistanceFromTrackBar,
+    this.labels,
+    this.smallLine,
+    this.bigLine,
+    this.linesAlignment = AMSliderHatchMarkAlignment.right,
+    this.labelBox,
+    this.displayLines})
       : assert(density > 0 && density <= 2);
 
   bool disabled;
@@ -1333,8 +1333,8 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
 
       for (AMSliderIgnoreSteps steps in _ignoreSteps) {
         if (((!widget.rtl) &&
-                (getValueByPositionIgnoreOffset(__axisPosTmp!) > steps.from! - _widgetStep! / 2 &&
-                    getValueByPositionIgnoreOffset(__axisPosTmp!) <= steps.to! + _widgetStep! / 2)) ||
+            (getValueByPositionIgnoreOffset(__axisPosTmp!) > steps.from! - _widgetStep! / 2 &&
+                getValueByPositionIgnoreOffset(__axisPosTmp!) <= steps.to! + _widgetStep! / 2)) ||
             ((widget.rtl) &&
                 (_realMax! - getValueByPositionIgnoreOffset(__axisPosTmp!) > steps.from! - _widgetStep! / 2 &&
                     _realMax! - getValueByPositionIgnoreOffset(__axisPosTmp!) <= steps.to! + _widgetStep! / 2))) {
@@ -1685,8 +1685,8 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
 
       for (AMSliderIgnoreSteps steps in _ignoreSteps) {
         if (((!widget.rtl) &&
-                (getValueByPositionIgnoreOffset(__axisPosTmp!) > steps.from! - _widgetStep! / 2 &&
-                    getValueByPositionIgnoreOffset(__axisPosTmp!) <= steps.to! + _widgetStep! / 2)) ||
+            (getValueByPositionIgnoreOffset(__axisPosTmp!) > steps.from! - _widgetStep! / 2 &&
+                getValueByPositionIgnoreOffset(__axisPosTmp!) <= steps.to! + _widgetStep! / 2)) ||
             ((widget.rtl) &&
                 (_realMax! - getValueByPositionIgnoreOffset(__axisPosTmp!) > steps.from! - _widgetStep! / 2 &&
                     _realMax! - getValueByPositionIgnoreOffset(__axisPosTmp!) <= steps.to! + _widgetStep! / 2))) {
@@ -2125,23 +2125,23 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
 
     Widget tooltipWidget = IgnorePointer(
         child: Center(
-      child: FittedBox(
-        child: Container(
+          child: FittedBox(
+            child: Container(
 //            height: ,
 //          height: __tooltipKEY.currentContext.size.height,
-          key: (side == 'left') ? leftTooltipKey : rightTooltipKey,
+              key: (side == 'left') ? leftTooltipKey : rightTooltipKey,
 //            alignment: Alignment.center,
-          child: (widget.tooltip != null && widget.tooltip!.custom != null)
-              ? widget.tooltip!.custom!(value)
-              : Container(
+              child: (widget.tooltip != null && widget.tooltip!.custom != null)
+                  ? widget.tooltip!.custom!(value)
+                  : Container(
                   padding: const EdgeInsets.all(8),
                   decoration: _tooltipData.boxStyle!.decoration,
                   foregroundDecoration: _tooltipData.boxStyle!.foregroundDecoration,
                   transform: _tooltipData.boxStyle!.transform,
                   child: _tooltipHolderWidget),
-        ),
-      ),
-    ));
+            ),
+          ),
+        ));
 
     double? top, right, bottom, left;
     switch (_tooltipData.direction) {
@@ -2247,18 +2247,17 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
 }
 
 class _MakeHandler extends StatelessWidget {
-  const _MakeHandler(
-      {this.id,
-      this.handlerData,
-      this.visibleTouchArea,
-      this.width,
-      this.height,
-      this.animation,
-      this.rtl = false,
-      this.rangeSlider = false,
-      this.axis,
-      this.handlerIndex,
-      this.touchSize});
+  const _MakeHandler({this.id,
+    this.handlerData,
+    this.visibleTouchArea,
+    this.width,
+    this.height,
+    this.animation,
+    this.rtl = false,
+    this.rangeSlider = false,
+    this.axis,
+    this.handlerIndex,
+    this.touchSize});
 
   final double? width;
   final double? height;
