@@ -1,11 +1,13 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:aqualife/generated/l10n.dart';
-import 'package:aqualife/models/app_settings.dart';
-import 'package:aqualife/services/hive_storage.dart';
-import 'package:aqualife/state/liquids_state.dart';
-import 'package:aqualife/state/records_state.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
+import '../generated/l10n.dart';
+import '../models/app_settings.dart';
+import '../services/hive_storage.dart';
+import '../state/liquids_state.dart';
+import '../state/records_state.dart';
 
 late AppSettings settings;
 late LiquidsState liquidsState;
@@ -47,4 +49,9 @@ Future<void> initGlobals() async {
   final currentVersion = packageInfo.version;
   settings.version = currentVersion;
   await settings.save();
+
+  // уведомления
+  final lnPlugin = FlutterLocalNotificationsPlugin();
+  await lnPlugin.initialize(const InitializationSettings(iOS: IOSInitializationSettings(requestBadgePermission: false)));
+  await lnPlugin.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(alert: true, sound: true);
 }
