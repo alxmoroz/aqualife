@@ -1,6 +1,6 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:aqualife/services/notifications.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../generated/l10n.dart';
@@ -12,6 +12,8 @@ import '../state/records_state.dart';
 late AppSettings settings;
 late LiquidsState liquidsState;
 late RecordsState recordsState;
+
+late NotificationService notificationService;
 late PackageInfo packageInfo;
 
 S get loc => S.current;
@@ -51,7 +53,7 @@ Future<void> initGlobals() async {
   await settings.save();
 
   // уведомления
-  final lnPlugin = FlutterLocalNotificationsPlugin();
-  await lnPlugin.initialize(const InitializationSettings(iOS: IOSInitializationSettings(requestBadgePermission: false)));
-  await lnPlugin.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(alert: true, sound: true);
+  notificationService = NotificationService();
+  await notificationService.init();
+  await notificationService.rescheduleNotifications();
 }

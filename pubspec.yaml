@@ -14,6 +14,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_mobx: any
+  flutter_native_timezone: any
   flutter_svg: any
   hive: any
   mobx: any

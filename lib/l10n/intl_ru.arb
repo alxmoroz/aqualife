@@ -1,6 +1,8 @@
 {
   "@@locale": "ru",
   "measure_unit_ml": "мл",
+  "notification_day_title": "Вода — это жизнь! Просто добавь воды!",
+  "notification_wakeup_title": "Доброе утро! Разбудите свой организм стаканом воды",
   "statistics": "Статистика",
   "today": "Сегодня"
 }

@@ -1,6 +1,8 @@
 {
   "@@locale": "en",
   "measure_unit_ml": "ml",
+  "notification_day_title": "Water is life! Just add water!",
+  "notification_wakeup_title": "Good morning! Wake up your body with a glass of water",
   "statistics": "Statistics",
   "today": "Today"
 }
