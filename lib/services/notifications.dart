@@ -16,10 +16,11 @@ class NotificationData {
 }
 
 class NotificationService {
-  late FlutterLocalNotificationsPlugin lnPlugin;
+  final lnPlugin = FlutterLocalNotificationsPlugin();
+  final lnDetails = const NotificationDetails(iOS: IOSNotificationDetails(threadIdentifier: 'aqualife'));
 
+  // TODO: убрать появление уведомлений при работе приложения
   Future init() async {
-    lnPlugin = FlutterLocalNotificationsPlugin();
     await lnPlugin.initialize(
       const InitializationSettings(
         iOS: IOSInitializationSettings(
@@ -32,23 +33,17 @@ class NotificationService {
     tz.initializeTimeZones();
     final timeZone = await FlutterNativeTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZone));
-
-    // test
-    // await lnPlugin.show(2, 'title 2 F', 'body 2 F', null);
-    // print(tz.TZDateTime.local(2021, 1, 1, 9, 0));
   }
 
   Future scheduleNotifications() async {
-    const lnDetails = NotificationDetails(iOS: IOSNotificationDetails(threadIdentifier: 'aqualife'));
-
     final notifications = [
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 9), loc.notification_wakeup_title),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 11), loc.notification_day_title),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 13), loc.notification_day_title),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 15), loc.notification_day_title),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 17), loc.notification_day_title),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 19), loc.notification_day_title),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 21), loc.notification_day_title),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 09), loc.notification_wakeup_title, loc.notification_wakeup_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 11), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 13), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 15), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 17), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 19), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 21), loc.notification_day_title, loc.notification_day_text),
     ];
 
     for (final n in notifications) {
@@ -63,6 +58,9 @@ class NotificationService {
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.wallClockTime,
       );
     }
+
+    // test
+    // await lnPlugin.show(1, loc.notification_wakeup_title, loc.notification_wakeup_text, lnDetails);
   }
 
   Future rescheduleNotifications() async {

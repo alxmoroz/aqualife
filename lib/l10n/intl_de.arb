@@ -1,8 +1,10 @@
 {
   "@@locale": "de",
   "measure_unit_ml": "ml",
-  "notification_day_title": "Wasser ist Leben! Nur Wasser hinzufügen!",
-  "notification_wakeup_title": "Guten Morgen! Wecken Sie Ihren Körper mit einem Glas Wasser auf",
+  "notification_day_title": "Wasser ist Leben!",
+  "notification_day_text": "Nur Wasser hinzufügen!",
+  "notification_wakeup_title": "Guten Morgen!",
+  "notification_wakeup_text": "Wecken Sie Ihren Körper mit einem Glas Wasser auf",
   "statistics": "Statistiken",
   "today": "Heute"
 }
