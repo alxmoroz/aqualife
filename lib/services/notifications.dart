@@ -37,13 +37,13 @@ class NotificationService {
 
   Future scheduleNotifications() async {
     final notifications = [
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 09), loc.notification_wakeup_title, loc.notification_wakeup_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 11), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 13), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 15), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 17), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 19), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 21), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 09, 02), loc.notification_wakeup_title, loc.notification_wakeup_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 11, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 13, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 15, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 17, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 19, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2021, 1, 1, 21, 02), loc.notification_day_title, loc.notification_day_text),
     ];
 
     for (final n in notifications) {
