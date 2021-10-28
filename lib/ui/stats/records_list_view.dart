@@ -1,11 +1,11 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:aqualife/services/globals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
+import '../../services/globals.dart';
 import '../components/colors.dart';
 import '../components/text/text_widgets.dart';
 

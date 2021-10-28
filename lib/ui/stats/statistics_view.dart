@@ -2,16 +2,16 @@
 
 import 'dart:ui';
 
-import 'package:aqualife/services/globals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/globals.dart';
 import '../components/colors.dart';
 import '../components/icons.dart';
 import '../components/material_wrapper.dart';
 import '../components/navbar.dart';
-import '../statistics/month_selector.dart';
-import '../statistics/records_list_view.dart';
+import '../stats/month_selector.dart';
+import '../stats/records_list_view.dart';
 
 class StatisticsView extends StatelessWidget {
   static String get routeName => 'StatisticsView';

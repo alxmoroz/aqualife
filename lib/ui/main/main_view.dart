@@ -4,12 +4,12 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:aqualife/services/globals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
+import '../../services/globals.dart';
 import '../components/buttons.dart';
 import '../components/colors.dart';
 import '../components/icons.dart';

@@ -8,7 +8,7 @@ import 'generated/l10n.dart';
 import 'services/globals.dart';
 import 'ui/components/images.dart';
 import 'ui/main/main_view.dart';
-import 'ui/statistics/statistics_view.dart';
+import 'ui/stats/statistics_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
