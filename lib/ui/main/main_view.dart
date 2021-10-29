@@ -77,7 +77,7 @@ class _MainViewState extends State<MainView> {
                   alignment: Alignment.bottomRight,
                   child: Button.icon(
                     editIcon(context),
-                        () => showRecordsEditDialog(context),
+                    () => showRecordsEditDialog(context),
                     padding: EdgeInsets.all(sidePadding * 2),
                   ),
                 ),
