@@ -5,12 +5,11 @@ import 'package:mobx/mobx.dart';
 
 import '../services/globals.dart';
 
-part 'records_edit_dialog_state.g.dart';
+part 'records_edit_view_state.g.dart';
 
-//TODO: стейт не только для диалога
-class RecordsEditDialogState = _RecordsEditDialogStateBase with _$RecordsEditDialogState;
+class RecordsEditViewState = _RecordsEditViewStateBase with _$RecordsEditViewState;
 
-abstract class _RecordsEditDialogStateBase with Store {
+abstract class _RecordsEditViewStateBase with Store {
   /// календарь
   @observable
   DateTime selectedDate = DateTime.now();
@@ -24,19 +23,19 @@ abstract class _RecordsEditDialogStateBase with Store {
   @action
   void setNextDate() {
     selectedDate = selectedDate.add(const Duration(days: 1));
-    updateControllerText();
+    _dateChanged();
   }
 
   @action
   void setPrevDate() {
     selectedDate = selectedDate.subtract(const Duration(days: 1));
-    updateControllerText();
+    _dateChanged();
   }
 
   @action
   void setToday() {
     selectedDate = DateTime.now();
-    updateControllerText();
+    _dateChanged();
   }
 
   /// редактирование количества жидкости
@@ -50,7 +49,7 @@ abstract class _RecordsEditDialogStateBase with Store {
     return _controller!;
   }
 
-  void updateControllerText() {
+  void _dateChanged() {
     controller.text = recordsState.waterQuantityForDate(selectedDate).toString();
   }
 

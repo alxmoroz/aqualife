@@ -38,8 +38,8 @@ class _RecordsEditDialogState extends State<RecordsEditDialog> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: sidePadding, horizontal: sidePadding * 3),
             child: CupertinoTextField(
-              controller: recordsEditDialogState.controller,
-              maxLength: 5,
+              controller: recordsEditViewState.controller,
+              maxLength: 4,
               keyboardType: TextInputType.number,
               decoration: const BoxDecoration(),
               textAlign: TextAlign.center,
@@ -51,7 +51,6 @@ class _RecordsEditDialogState extends State<RecordsEditDialog> {
               suffix: Button.icon(plusOutlinedIcon(context), () => print('plus')),
             ),
           ),
-          Button.outlined('Готово', () => Navigator.of(context).pop())
         ],
       ),
     );

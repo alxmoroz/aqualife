@@ -2,19 +2,13 @@
 
 import 'package:flutter/cupertino.dart';
 
+import 'colors.dart';
 import 'text/text_widgets.dart';
 
-enum ButtonType { primary, outlined }
-
 class Button extends StatelessWidget {
-  const Button(this.title, this.onPressed, {this.child, this.color, this.type, this.titleColor, this.padding, this.icon});
+  const Button(this.title, this.onPressed, {this.child, this.color, this.titleColor, this.padding, this.icon});
 
-  const Button.outlined(this.title, this.onPressed, {this.child, this.titleColor, this.padding})
-      : type = ButtonType.outlined,
-        icon = null,
-        color = null;
-
-  const Button.icon(this.icon, this.onPressed, {this.color, this.type, this.padding})
+  const Button.icon(this.icon, this.onPressed, {this.color, this.padding})
       : title = null,
         child = icon,
         titleColor = null;
@@ -23,7 +17,6 @@ class Button extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget? child;
   final Widget? icon;
-  final ButtonType? type;
   final Color? color;
   final Color? titleColor;
   final EdgeInsets? padding;
@@ -33,11 +26,9 @@ class Button extends StatelessWidget {
     return CupertinoButton(
       padding: padding ?? EdgeInsets.zero,
       onPressed: onPressed,
-      color: type == ButtonType.primary ? CupertinoTheme.of(context).primaryColor : color,
+      color: color,
       disabledColor: CupertinoColors.systemGrey5,
-      child: Container(
-        child: child ?? MediumText(title ?? '', color: titleColor ?? (type == null ? CupertinoTheme.of(context).primaryColor : null)),
-      ),
+      child: child ?? MediumText(title ?? '', color: titleColor ?? mainColor),
     );
   }
 }

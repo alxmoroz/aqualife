@@ -6,13 +6,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
 import '../../services/globals.dart';
-import '../../state/records_edit_dialog_state.dart';
+import '../../state/records_edit_view_state.dart';
 import '../components/buttons.dart';
 import '../components/icons.dart';
 import '../components/text/text_widgets.dart';
 
 class DaySelector extends StatelessWidget {
-  RecordsEditDialogState get _state => recordsEditDialogState;
+  RecordsEditViewState get _state => recordsEditViewState;
 
   bool get _showTodayBtn {
     final today = DateTime.now();
@@ -34,7 +34,7 @@ class DaySelector extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Button.icon(chevronBackIcon(context), _state.setPrevDate),
-              MediumText(DateFormat.yMMMMd().format(_state.selectedDate)),
+              H3(DateFormat.yMMMMd().format(_state.selectedDate)),
               _state.canNextDate ? Button.icon(chevronForwardIcon(context), _state.setNextDate) : emptyButton,
             ],
           ),

@@ -7,14 +7,14 @@ import '../models/app_settings.dart';
 import '../services/hive_storage.dart';
 import '../services/notifications.dart';
 import '../state/liquids_state.dart';
-import '../state/records_edit_dialog_state.dart';
+import '../state/records_edit_view_state.dart';
 import '../state/records_state.dart';
 import '../state/stats_state.dart';
 
 late AppSettings settings;
 late LiquidsState liquidsState;
 late RecordsState recordsState;
-late RecordsEditDialogState recordsEditDialogState;
+late RecordsEditViewState recordsEditViewState;
 late StatsState statsState;
 
 late NotificationService notificationService;
@@ -49,7 +49,7 @@ Future<void> initGlobals() async {
   recordsState = RecordsState();
   recordsState.loadRecords();
 
-  recordsEditDialogState = RecordsEditDialogState();
+  recordsEditViewState = RecordsEditViewState();
   statsState = StatsState();
 
   // версия приложения

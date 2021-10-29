@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 
 Widget chevronBackIcon(BuildContext context, {Color? color}) => Icon(
       CupertinoIcons.chevron_back,
-      color: CupertinoDynamicColor.maybeResolve(color, context),
+      color: CupertinoDynamicColor.maybeResolve(color ?? mainColor, context),
     );
 
 Widget chevronForwardIcon(BuildContext context, {Color? color}) => Icon(
-      CupertinoIcons.chevron_forward,
-      color: CupertinoDynamicColor.maybeResolve(color, context),
+  CupertinoIcons.chevron_forward,
+      color: CupertinoDynamicColor.maybeResolve(color ?? mainColor, context),
     );
 
 Widget chartIcon(BuildContext context, {Color? color, double? size}) => Icon(
@@ -35,12 +35,6 @@ Widget plusOutlinedIcon(BuildContext context, {Color? color, double? size}) => I
 Widget minusOutlinedIcon(BuildContext context, {Color? color, double? size}) => Icon(
       CupertinoIcons.minus_circle,
       size: size ?? 56,
-      color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
-    );
-
-Widget homeIcon(BuildContext context, {Color? color, double? size}) => Icon(
-      CupertinoIcons.home,
-      size: size ?? 32,
       color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
     );
 

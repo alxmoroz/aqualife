@@ -38,7 +38,7 @@ class App extends StatelessWidget {
         future: _initFuture,
         builder: (_, snapshot) => snapshot.connectionState == ConnectionState.done ? MainView() : SplashScreen(),
       ),
-      routes: {},
+      // routes: {},
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

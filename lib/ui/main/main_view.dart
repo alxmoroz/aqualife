@@ -42,6 +42,7 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -76,7 +77,7 @@ class _MainViewState extends State<MainView> {
                   alignment: Alignment.bottomRight,
                   child: Button.icon(
                     editIcon(context),
-                    () => showRecordsEditDialog(context),
+                        () => showRecordsEditDialog(context),
                     padding: EdgeInsets.all(sidePadding * 2),
                   ),
                 ),
