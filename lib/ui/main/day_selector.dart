@@ -6,14 +6,17 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
 import '../../services/globals.dart';
+import '../../state/records_edit_dialog_state.dart';
 import '../components/buttons.dart';
 import '../components/icons.dart';
 import '../components/text/text_widgets.dart';
 
-class MonthSelector extends StatelessWidget {
+class DaySelector extends StatelessWidget {
+  RecordsEditDialogState get _state => recordsEditDialogState;
+
   bool get _showTodayBtn {
     final today = DateTime.now();
-    return !(statsState.selectedMonth.year == today.year && statsState.selectedMonth.month == today.month);
+    return !(_state.selectedDate.year == today.year && _state.selectedDate.month == today.month && _state.selectedDate.day == today.day);
   }
 
   @override
@@ -25,14 +28,14 @@ class MonthSelector extends StatelessWidget {
           if (_showTodayBtn)
             Align(
               alignment: Alignment.centerRight,
-              child: Button(loc.today, statsState.setCurrentMonth, padding: EdgeInsets.only(right: sidePadding * 2)),
+              child: Button(loc.today, _state.setToday, padding: EdgeInsets.only(right: sidePadding * 2)),
             ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              statsState.canPrevMonth ? Button.icon(chevronBackIcon(context), statsState.setPrevMonth) : emptyButton,
-              MediumText(DateFormat.yMMMM().format(statsState.selectedMonth)),
-              statsState.canNextMonth ? Button.icon(chevronForwardIcon(context), statsState.setNextMonth) : emptyButton,
+              Button.icon(chevronBackIcon(context), _state.setPrevDate),
+              MediumText(DateFormat.yMMMMd().format(_state.selectedDate)),
+              _state.canNextDate ? Button.icon(chevronForwardIcon(context), _state.setNextDate) : emptyButton,
             ],
           ),
         ],

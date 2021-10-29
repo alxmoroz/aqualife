@@ -1,17 +1,21 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:aqualife/services/notifications.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../generated/l10n.dart';
 import '../models/app_settings.dart';
 import '../services/hive_storage.dart';
+import '../services/notifications.dart';
 import '../state/liquids_state.dart';
+import '../state/records_edit_dialog_state.dart';
 import '../state/records_state.dart';
+import '../state/stats_state.dart';
 
 late AppSettings settings;
 late LiquidsState liquidsState;
 late RecordsState recordsState;
+late RecordsEditDialogState recordsEditDialogState;
+late StatsState statsState;
 
 late NotificationService notificationService;
 late PackageInfo packageInfo;
@@ -44,6 +48,9 @@ Future<void> initGlobals() async {
   // записи
   recordsState = RecordsState();
   recordsState.loadRecords();
+
+  recordsEditDialogState = RecordsEditDialogState();
+  statsState = StatsState();
 
   // версия приложения
   packageInfo = await PackageInfo.fromPlatform();

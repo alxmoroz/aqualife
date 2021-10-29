@@ -26,8 +26,26 @@ Widget plusIcon(BuildContext context, {Color? color, double? size}) => Icon(
       color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
     );
 
+Widget plusOutlinedIcon(BuildContext context, {Color? color, double? size}) => Icon(
+      CupertinoIcons.plus_circle,
+      size: size ?? 56,
+      color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
+    );
+
+Widget minusOutlinedIcon(BuildContext context, {Color? color, double? size}) => Icon(
+      CupertinoIcons.minus_circle,
+      size: size ?? 56,
+      color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
+    );
+
 Widget homeIcon(BuildContext context, {Color? color, double? size}) => Icon(
       CupertinoIcons.home,
       size: size ?? 32,
+      color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
+    );
+
+Widget editIcon(BuildContext context, {Color? color, double? size}) => Icon(
+      CupertinoIcons.pencil_circle,
+      size: size ?? 42,
       color: CupertinoDynamicColor.resolve(color ?? mainColor, context),
     );

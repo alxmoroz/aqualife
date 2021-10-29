@@ -1,9 +1,10 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:aqualife/models/record.dart';
-import 'package:aqualife/services/globals.dart';
-import 'package:aqualife/services/hive_storage.dart';
 import 'package:mobx/mobx.dart';
+
+import '../models/record.dart';
+import '../services/globals.dart';
+import '../services/hive_storage.dart';
 
 part 'records_state.g.dart';
 
@@ -13,40 +14,11 @@ abstract class _RecordsStateBase with Store {
   @observable
   List<Record> records = [];
 
-  @observable
-  DateTime selectedMonth = DateTime.now();
-
   @action
   void _setRecords(List<Record> newRecords) => records = newRecords;
 
-  @action
-  void setNextMonth() {
-    selectedMonth = DateTime(selectedMonth.year, selectedMonth.month + 1);
-  }
-
-  @action
-  void setPrevMonth() {
-    selectedMonth = DateTime(selectedMonth.year, selectedMonth.month - 1);
-  }
-
-  @action
-  void setCurrentMonth() {
-    selectedMonth = DateTime.now();
-  }
-
   @computed
   DateTime get firstDate => records.isNotEmpty ? records.first.dateTime : DateTime.now();
-
-  @computed
-  bool get canNextMonth {
-    final now = DateTime.now();
-    return !(selectedMonth.year == now.year && selectedMonth.month == now.month);
-  }
-
-  @computed
-  bool get canPrevMonth {
-    return !(selectedMonth.year == firstDate.year && selectedMonth.month == firstDate.month);
-  }
 
   bool _sameDay(DateTime date1, DateTime date2) => date1.year == date2.year && date1.month == date2.month && date1.day == date2.day;
 
@@ -65,8 +37,8 @@ abstract class _RecordsStateBase with Store {
       await HiveStorage.recordBox.add(record);
     }
 
-    settings.lastShotValue = quantity;
-    await settings.save();
+    // settings.lastShotValue = quantity;
+    // await settings.save();
 
     loadRecords();
   }
@@ -75,9 +47,9 @@ abstract class _RecordsStateBase with Store {
     _setRecords(HiveStorage.recordBox.values.toList(growable: false));
   }
 
-  List<Record> recordsForDate(DateTime date) => records.where((r) => _sameDay(date, r.dateTime)).toList(growable: false);
+  List<Record> _recordsForDate(DateTime date) => records.where((r) => _sameDay(date, r.dateTime)).toList(growable: false);
 
-  int waterQuantityForDate(DateTime date) => recordsForDate(date).fold(0, (sum, r) => sum + r.waterQuantity);
+  int waterQuantityForDate(DateTime date) => _recordsForDate(date).fold(0, (sum, r) => sum + r.waterQuantity);
 
   int get waterQuantityToday => waterQuantityForDate(DateTime.now());
 

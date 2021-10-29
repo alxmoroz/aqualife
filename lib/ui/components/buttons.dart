@@ -4,20 +4,15 @@ import 'package:flutter/cupertino.dart';
 
 import 'text/text_widgets.dart';
 
-enum ButtonType { primary, secondary, outlined, error }
+enum ButtonType { primary, outlined }
 
 class Button extends StatelessWidget {
   const Button(this.title, this.onPressed, {this.child, this.color, this.type, this.titleColor, this.padding, this.icon});
 
-  // const Button.primary(this.title, this.onPressed, {this.child, this.titleColor = CupertinoColors.systemGrey6, this.padding})
-  //     : type = ButtonType.primary,
-  //       icon = null,
-  //       color = null;
-
-  // const Button.secondary(this.title, this.onPressed, {this.child, this.titleColor, this.padding})
-  //     : type = ButtonType.secondary,
-  //       icon = null,
-  //       color = CupertinoColors.systemGrey4;
+  const Button.outlined(this.title, this.onPressed, {this.child, this.titleColor, this.padding})
+      : type = ButtonType.outlined,
+        icon = null,
+        color = null;
 
   const Button.icon(this.icon, this.onPressed, {this.color, this.type, this.padding})
       : title = null,
@@ -40,7 +35,9 @@ class Button extends StatelessWidget {
       onPressed: onPressed,
       color: type == ButtonType.primary ? CupertinoTheme.of(context).primaryColor : color,
       disabledColor: CupertinoColors.systemGrey5,
-      child: child ?? MediumText(title ?? '', color: titleColor ?? (type == null ? CupertinoTheme.of(context).primaryColor : null)),
+      child: Container(
+        child: child ?? MediumText(title ?? '', color: titleColor ?? (type == null ? CupertinoTheme.of(context).primaryColor : null)),
+      ),
     );
   }
 }

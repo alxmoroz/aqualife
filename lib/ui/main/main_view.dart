@@ -17,6 +17,7 @@ import '../components/text/text_widgets.dart';
 import '../main/dispenser.dart';
 import 'daily_progress_indicator.dart';
 import 'drawer.dart';
+import 'records_edit_dialog.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -68,6 +69,20 @@ class _MainViewState extends State<MainView> {
                     child: Container(color: CupertinoDynamicColor.resolve(mainFillColor, context)),
                   ),
                 ),
+
+              /// кнопка для редактирования
+              SafeArea(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Button.icon(
+                    editIcon(context),
+                    () => showRecordsEditDialog(context),
+                    padding: EdgeInsets.all(sidePadding * 2),
+                  ),
+                ),
+              ),
+
+              /// диспенсер с кнопкой "+"
               SafeArea(
                 child: Align(
                   alignment: Alignment.bottomCenter,
