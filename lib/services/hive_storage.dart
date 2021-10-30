@@ -1,10 +1,11 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:aqualife/models/app_settings.dart';
-import 'package:aqualife/models/liquid.dart';
-import 'package:aqualife/models/record.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../models/app_settings.dart';
+import '../models/liquid.dart';
+import '../models/record.dart';
 
 const bool _kIsWeb = identical(0, 0.0);
 

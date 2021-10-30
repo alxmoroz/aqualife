@@ -62,14 +62,6 @@ class _MainViewState extends State<MainView> {
               quantityText(
                 '${recordsState.waterQuantityToday} ${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
               ),
-              if (showDispenser)
-                BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
-                  child: GestureDetector(
-                    onTap: toggleDispenser,
-                    child: Container(color: CupertinoDynamicColor.resolve(mainFillColor, context)),
-                  ),
-                ),
 
               /// кнопка для редактирования
               SafeArea(
@@ -82,6 +74,16 @@ class _MainViewState extends State<MainView> {
                   ),
                 ),
               ),
+
+              /// мыльный экран
+              if (showDispenser)
+                BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
+                  child: GestureDetector(
+                    onTap: toggleDispenser,
+                    child: Container(color: CupertinoDynamicColor.resolve(mainFillColor, context)),
+                  ),
+                ),
 
               /// диспенсер с кнопкой "+"
               SafeArea(
@@ -103,7 +105,7 @@ class _MainViewState extends State<MainView> {
                                   return;
                                 }
                                 if (lowerValue is num) {
-                                  await recordsState.addRecord(quantity: lowerValue.toInt());
+                                  await recordsState.addQuantityForDate(quantity: lowerValue.toInt(), date: DateTime.now());
                                 }
                                 Timer(shortDuration, toggleDispenser);
                               },

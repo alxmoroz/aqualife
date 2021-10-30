@@ -14,6 +14,11 @@ Widget chevronForwardIcon(BuildContext context, {Color? color}) => Icon(
       color: CupertinoDynamicColor.maybeResolve(color ?? mainColor, context),
     );
 
+Widget chevronFastForwardIcon(BuildContext context, {Color? color}) => Icon(
+      CupertinoIcons.chevron_right_circle,
+      color: CupertinoDynamicColor.maybeResolve(color ?? mainColor, context),
+    );
+
 Widget chartIcon(BuildContext context, {Color? color, double? size}) => Icon(
       CupertinoIcons.chart_bar_alt_fill,
       size: size ?? 32,

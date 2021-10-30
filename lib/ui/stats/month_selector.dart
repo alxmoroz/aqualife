@@ -25,13 +25,13 @@ class MonthSelector extends StatelessWidget {
           if (_showTodayBtn)
             Align(
               alignment: Alignment.centerRight,
-              child: Button(loc.today, statsState.setCurrentMonth, padding: EdgeInsets.only(right: sidePadding * 2)),
+              child: Button.icon(chevronFastForwardIcon(context), statsState.setCurrentMonth, padding: EdgeInsets.only(right: sidePadding * 2)),
             ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               statsState.canPrevMonth ? Button.icon(chevronBackIcon(context), statsState.setPrevMonth) : emptyButton,
-              MediumText(DateFormat.yMMMM().format(statsState.selectedMonth)),
+              H3(DateFormat.yMMMM().format(statsState.selectedMonth)),
               statsState.canNextMonth ? Button.icon(chevronForwardIcon(context), statsState.setNextMonth) : emptyButton,
             ],
           ),

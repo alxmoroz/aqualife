@@ -1,14 +1,15 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:aqualife/models/liquid.dart';
-import 'package:aqualife/services/hive_storage.dart';
 import 'package:hive/hive.dart';
+
+import '../services/hive_storage.dart';
+import 'liquid.dart';
 
 part 'record.g.dart';
 
 @HiveType(typeId: HType.Record)
 class Record extends HiveObject {
-  Record({Liquid? liquid, required this.liquidQuantity}) {
+  Record({required this.dateTime, Liquid? liquid}) {
     _liquidHL = HiveList(HiveStorage.liquidBox);
     if (liquid != null) {
       _liquidHL!.add(liquid);

@@ -1,9 +1,10 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:aqualife/services/globals.dart';
-import 'package:aqualife/ui/components/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../services/globals.dart';
+import '../colors.dart';
 
 class TextShadow {
   const TextShadow(this.color, this.offset);

@@ -1,8 +1,9 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:aqualife/models/liquid.dart';
-import 'package:aqualife/services/hive_storage.dart';
 import 'package:mobx/mobx.dart';
+
+import '../models/liquid.dart';
+import '../services/hive_storage.dart';
 
 part 'liquids_state.g.dart';
 
