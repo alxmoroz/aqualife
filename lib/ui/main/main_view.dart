@@ -45,7 +45,7 @@ class _MainViewState extends State<MainView> {
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: CupertinoDynamicColor.resolve(appBarBgColor, context),
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: Builder(

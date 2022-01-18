@@ -31,3 +31,8 @@ Color get secondaryFillColor => const CupertinoDynamicColor.withBrightness(
       color: Color.fromARGB(150, 245, 245, 250),
       darkColor: Color.fromARGB(150, 10, 15, 20),
     );
+
+Color get appBarBgColor => const CupertinoDynamicColor.withBrightness(
+      color: Color.fromARGB(0, 255, 255, 255),
+      darkColor: Color.fromARGB(0, 0, 0, 0),
+    );
