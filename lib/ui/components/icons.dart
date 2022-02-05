@@ -10,7 +10,7 @@ Widget chevronBackIcon(BuildContext context, {Color? color}) => Icon(
     );
 
 Widget chevronForwardIcon(BuildContext context, {Color? color}) => Icon(
-  CupertinoIcons.chevron_forward,
+      CupertinoIcons.chevron_forward,
       color: (color ?? mainColor).resolve(context),
     );
 
