@@ -15,36 +15,36 @@ Widget chevronForwardIcon(BuildContext context, {Color? color}) => Icon(
     );
 
 Widget chevronFastForwardIcon(BuildContext context, {Color? color}) => Icon(
-  CupertinoIcons.chevron_right_circle,
+      CupertinoIcons.chevron_right_circle,
       color: (color ?? mainColor).resolve(context),
     );
 
 Widget chartIcon(BuildContext context, {Color? color, double? size}) => Icon(
-  CupertinoIcons.chart_bar_alt_fill,
+      CupertinoIcons.chart_bar_alt_fill,
       size: size ?? 32,
       color: (color ?? mainColor).resolve(context),
     );
 
 Widget plusIcon(BuildContext context, {Color? color, double? size}) => Icon(
-  CupertinoIcons.plus_circle_fill,
+      CupertinoIcons.plus_circle_fill,
       size: size ?? 96,
       color: (color ?? mainColor).resolve(context),
     );
 
 Widget plusOutlinedIcon(BuildContext context, {Color? color, double? size}) => Icon(
-  CupertinoIcons.plus_circle,
+      CupertinoIcons.plus_circle,
       size: size ?? 56,
       color: (color ?? mainColor).resolve(context),
     );
 
 Widget minusOutlinedIcon(BuildContext context, {Color? color, double? size}) => Icon(
-  CupertinoIcons.minus_circle,
+      CupertinoIcons.minus_circle,
       size: size ?? 56,
       color: (color ?? mainColor).resolve(context),
     );
 
 Widget editIcon(BuildContext context, {Color? color, double? size}) => Icon(
-  CupertinoIcons.pencil_circle,
+      CupertinoIcons.pencil_circle,
       size: size ?? 42,
       color: (color ?? mainColor).resolve(context),
     );
