@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/globals.dart';
 import '../components/colors.dart';
-import '../components/text/text_widgets.dart';
+import '../components/text_widgets.dart';
 import '../stats/month_selector.dart';
 import '../stats/records_list_view.dart';
 
@@ -14,7 +14,7 @@ class ALDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: CupertinoDynamicColor.resolve(backgroundColor, context),
+        color: backgroundColor.resolve(context),
         child: SafeArea(
             child: Column(
           children: [

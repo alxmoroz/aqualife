@@ -42,7 +42,7 @@ class DailyProgressIndicator extends StatelessWidget {
         clipper: WaveClip(),
         child: Container(
           height: MediaQuery.of(context).size.height + 100,
-          color: CupertinoDynamicColor.resolve(secondaryColor, context),
+          color: secondaryColor.resolve(context),
         ),
       ),
     );

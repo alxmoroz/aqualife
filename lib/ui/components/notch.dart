@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
+
 class Notch extends StatelessWidget {
   const Notch();
 
@@ -18,7 +20,7 @@ class Notch extends StatelessWidget {
           height: 4,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            color: CupertinoDynamicColor.resolve(CupertinoColors.systemGrey, context),
+            color: (CupertinoColors.systemGrey).resolve(context),
           ),
         ),
       ),

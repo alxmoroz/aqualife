@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 
 import '../../services/globals.dart';
 import '../components/colors.dart';
-import '../components/text/text_widgets.dart';
+import '../components/text_widgets.dart';
 
 class RecordsListView extends StatelessWidget {
   int get _daysInMonthCount => DateTime(statsState.selectedMonth.year, statsState.selectedMonth.month + 1, 0).day;
@@ -44,7 +44,7 @@ class RecordsListView extends StatelessWidget {
               children: [
                 LinearProgressIndicator(
                   value: value / recordsState.dayQuota,
-                  color: CupertinoDynamicColor.resolve(secondaryColor, context),
+                  color: secondaryColor.resolve(context),
                   minHeight: 28,
                   backgroundColor: Colors.transparent,
                 ),

@@ -3,8 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../services/globals.dart';
-import '../colors.dart';
+import '../../services/globals.dart';
+import 'colors.dart';
 
 class TextShadow {
   const TextShadow(this.color, this.offset);

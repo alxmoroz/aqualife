@@ -13,7 +13,7 @@ import '../../services/globals.dart';
 import '../components/buttons.dart';
 import '../components/colors.dart';
 import '../components/icons.dart';
-import '../components/text/text_widgets.dart';
+import '../components/text_widgets.dart';
 import '../main/dispenser.dart';
 import 'daily_progress_indicator.dart';
 import 'drawer.dart';
@@ -45,7 +45,7 @@ class _MainViewState extends State<MainView> {
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: CupertinoDynamicColor.resolve(appBarBgColor, context),
+        backgroundColor: appBarBgColor.resolve(context),
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: Builder(
@@ -54,7 +54,7 @@ class _MainViewState extends State<MainView> {
       ),
       drawer: ALDrawer(),
       body: Container(
-        color: CupertinoDynamicColor.resolve(backgroundColor, context),
+        color: backgroundColor.resolve(context),
         child: Observer(
           builder: (_) => Stack(
             children: [
@@ -81,7 +81,7 @@ class _MainViewState extends State<MainView> {
                   filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
                   child: GestureDetector(
                     onTap: toggleDispenser,
-                    child: Container(color: CupertinoDynamicColor.resolve(mainFillColor, context)),
+                    child: Container(color: mainFillColor.resolve(context)),
                   ),
                 ),
 

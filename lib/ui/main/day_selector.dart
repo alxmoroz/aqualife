@@ -9,7 +9,7 @@ import '../../services/globals.dart';
 import '../../state/records_edit_view_state.dart';
 import '../components/buttons.dart';
 import '../components/icons.dart';
-import '../components/text/text_widgets.dart';
+import '../components/text_widgets.dart';
 
 class DaySelector extends StatelessWidget {
   RecordsEditViewState get _state => recordsEditViewState;

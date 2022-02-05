@@ -36,3 +36,7 @@ Color get appBarBgColor => const CupertinoDynamicColor.withBrightness(
       color: Color.fromARGB(0, 255, 255, 255),
       darkColor: Color.fromARGB(0, 0, 0, 0),
     );
+
+extension ResolvedColor on Color {
+  Color resolve(BuildContext ctx) => CupertinoDynamicColor.resolve(this, ctx);
+}

@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import '../../services/globals.dart';
 import '../components/am_slider.dart';
 import '../components/colors.dart';
-import '../components/text/text_widgets.dart';
+import '../components/text_widgets.dart';
 
 class Dispenser extends StatelessWidget {
   const Dispenser({required this.value, required this.onDragCompleted});
@@ -42,7 +42,7 @@ class Dispenser extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: CupertinoDynamicColor.resolve(secondaryFillColor, context),
+        color: secondaryFillColor.resolve(context),
         borderRadius: BorderRadius.circular(borderR),
       ),
       child: Column(
@@ -64,7 +64,7 @@ class Dispenser extends StatelessWidget {
               handler: AMSliderHandler(child: Container()),
               trackBar: AMSliderTrackBar(
                 activeTrackBarHeight: sliderWidth,
-                activeTrackBar: BoxDecoration(color: CupertinoDynamicColor.resolve(secondaryColor, context)),
+                activeTrackBar: BoxDecoration(color: secondaryColor.resolve(context)),
                 inactiveTrackBar: const BoxDecoration(color: Colors.transparent),
               ),
               hatchMark: AMSliderHatchMark(

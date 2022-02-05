@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import '../../services/globals.dart';
 import '../components/buttons.dart';
 import '../components/icons.dart';
-import '../components/text/text_widgets.dart';
+import '../components/text_widgets.dart';
 
 class MonthSelector extends StatelessWidget {
   bool get _showTodayBtn {

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
-import 'text/text_widgets.dart';
+import 'text_widgets.dart';
 
 CupertinoNavigationBar navBar(
   BuildContext context, {
