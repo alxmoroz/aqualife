@@ -2,7 +2,6 @@
 
 import 'package:aqualife/ui/components/colors.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 Widget chevronBackIcon(BuildContext context, {Color? color}) => Icon(
       CupertinoIcons.chevron_back,

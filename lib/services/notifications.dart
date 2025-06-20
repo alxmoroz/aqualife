@@ -17,13 +17,13 @@ class NotificationData {
 
 class NotificationService {
   final lnPlugin = FlutterLocalNotificationsPlugin();
-  final lnDetails = const NotificationDetails(iOS: IOSNotificationDetails(threadIdentifier: 'aqualife'));
+  final lnDetails = const NotificationDetails(iOS: DarwinNotificationDetails(threadIdentifier: 'aqualife'));
 
   // TODO: убрать появление уведомлений при работе приложения
   Future init() async {
     await lnPlugin.initialize(
       const InitializationSettings(
-        iOS: IOSInitializationSettings(
+        iOS: DarwinInitializationSettings(
           requestBadgePermission: false,
           onDidReceiveLocalNotification: null,
         ),

@@ -1,6 +1,5 @@
 // Copyright (c) 2021. Alexandr Moroz
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/globals.dart';

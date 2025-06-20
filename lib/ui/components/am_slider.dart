@@ -735,7 +735,7 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
     _rightTooltipAnimation = Tween<Offset>(begin: animationStart, end: animationFinish)
         .animate(CurvedAnimation(parent: _rightTooltipAnimationController, curve: Curves.fastOutSlowIn));
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _renderBoxInitialization();
 
       _arrangeHandlersPosition();
