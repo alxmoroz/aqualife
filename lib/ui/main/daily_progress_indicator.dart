@@ -28,7 +28,7 @@ class WaveClip extends CustomClipper<Path> {
 }
 
 class DailyProgressIndicator extends StatelessWidget {
-  const DailyProgressIndicator(this.value);
+  const DailyProgressIndicator(this.value, {super.key});
 
   final double value;
 

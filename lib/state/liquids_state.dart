@@ -7,7 +7,7 @@ import '../services/hive_storage.dart';
 
 part 'liquids_state.g.dart';
 
-class LiquidsState = _LiquidsStateBase with _$LiquidsState;
+class LiquidsState extends _LiquidsStateBase with _$LiquidsState {}
 
 abstract class _LiquidsStateBase with Store {
   @observable

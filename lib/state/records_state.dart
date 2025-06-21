@@ -9,7 +9,7 @@ import '../services/hive_storage.dart';
 
 part 'records_state.g.dart';
 
-class RecordsState = _RecordsStateBase with _$RecordsState;
+class RecordsState extends _RecordsStateBase with _$RecordsState {}
 
 abstract class _RecordsStateBase with Store {
   static const DEFAULT_LIQUID_CODE = 'water';

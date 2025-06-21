@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'colors.dart';
 
 class Notch extends StatelessWidget {
-  const Notch();
+  const Notch({super.key});
 
   static double height = 30;
 

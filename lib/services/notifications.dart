@@ -23,10 +23,7 @@ class NotificationService {
   Future init() async {
     await lnPlugin.initialize(
       const InitializationSettings(
-        iOS: DarwinInitializationSettings(
-          requestBadgePermission: false,
-          onDidReceiveLocalNotification: null,
-        ),
+        iOS: DarwinInitializationSettings(requestBadgePermission: false),
       ),
     );
     await lnPlugin.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(alert: true, sound: true);
@@ -37,13 +34,13 @@ class NotificationService {
 
   Future scheduleNotifications() async {
     final notifications = [
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 09, 02), loc.notification_wakeup_title, loc.notification_wakeup_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 11, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 13, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 15, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 17, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 19, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2021, 1, 1, 21, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2025, 1, 1, 09, 02), loc.notification_wakeup_title, loc.notification_wakeup_text),
+      NotificationData(tz.TZDateTime.local(2025, 1, 1, 11, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2025, 1, 1, 13, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2025, 1, 1, 15, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2025, 1, 1, 17, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2025, 1, 1, 19, 02), loc.notification_day_title, loc.notification_day_text),
+      NotificationData(tz.TZDateTime.local(2025, 1, 1, 21, 02), loc.notification_day_title, loc.notification_day_text),
     ];
 
     for (final n in notifications) {
@@ -54,8 +51,7 @@ class NotificationService {
         n.date,
         lnDetails,
         matchDateTimeComponents: DateTimeComponents.time,
-        androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.wallClockTime,
+        androidScheduleMode: AndroidScheduleMode.inexact,
       );
     }
 

@@ -20,6 +20,7 @@ class TextShadow {
 class NormalText extends StatelessWidget {
   const NormalText(
     this.text, {
+    super.key,
     this.size,
     this.sizeScale,
     this.color,
@@ -84,42 +85,22 @@ class NormalText extends StatelessWidget {
 }
 
 class LightText extends NormalText {
-  const LightText(String text, {double? size, Color? color, FontWeight? weight, TextAlign? align, EdgeInsets? padding, double? sizeScale})
+  const LightText(super.text, {super.key, super.size, super.color, FontWeight? weight, super.align, super.padding, super.sizeScale})
       : super(
-          text,
-          color: color,
           weight: weight ?? FontWeight.w300,
-          size: size,
-          sizeScale: sizeScale,
-          align: align,
-          padding: padding,
         );
 }
 
 class MediumText extends NormalText {
-  const MediumText(String text,
-      {double? size, Color? color, FontWeight? weight, TextAlign? align, EdgeInsets? padding, TextShadow? shadow, double? sizeScale})
+  const MediumText(super.text, {super.key, super.size, super.color, FontWeight? weight, super.align, super.padding, super.shadow, super.sizeScale})
       : super(
-          text,
-          color: color,
           weight: weight ?? FontWeight.w500,
-          size: size,
-          sizeScale: sizeScale,
-          align: align,
-          padding: padding,
-          shadow: shadow,
         );
 }
 
 class H3 extends MediumText {
-  const H3(String text, {Color? color, FontWeight? weight, TextAlign? align, EdgeInsets? padding, TextShadow? shadow})
+  const H3(super.text, {super.key, super.color, super.weight, super.align, super.padding, super.shadow})
       : super(
-          text,
-          color: color,
-          weight: weight,
           sizeScale: 1.2,
-          align: align,
-          padding: padding,
-          shadow: shadow,
         );
 }

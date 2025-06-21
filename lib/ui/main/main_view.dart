@@ -19,8 +19,10 @@ import 'drawer.dart';
 import 'records_edit_dialog.dart';
 
 class MainView extends StatefulWidget {
+  const MainView({super.key});
+
   @override
-  _MainViewState createState() => _MainViewState();
+  State createState() => _MainViewState();
 }
 
 class _MainViewState extends State<MainView> {
@@ -51,7 +53,7 @@ class _MainViewState extends State<MainView> {
           builder: (BuildContext innerCtx) => Button.icon(chartIcon(context), () => Scaffold.of(innerCtx).openDrawer()),
         ),
       ),
-      drawer: ALDrawer(),
+      drawer: const ALDrawer(),
       body: Container(
         color: backgroundColor.resolve(context),
         child: Observer(

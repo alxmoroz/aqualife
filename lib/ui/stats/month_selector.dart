@@ -11,6 +11,8 @@ import '../components/icons.dart';
 import '../components/text_widgets.dart';
 
 class MonthSelector extends StatelessWidget {
+  const MonthSelector({super.key});
+
   bool get _showTodayBtn {
     final today = DateTime.now();
     return !(statsState.selectedMonth.year == today.year && statsState.selectedMonth.month == today.month);

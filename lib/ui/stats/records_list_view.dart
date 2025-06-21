@@ -9,6 +9,8 @@ import '../components/colors.dart';
 import '../components/text_widgets.dart';
 
 class RecordsListView extends StatelessWidget {
+  const RecordsListView({super.key});
+
   int get _daysInMonthCount => DateTime(statsState.selectedMonth.year, statsState.selectedMonth.month + 1, 0).day;
 
   List<DateTime> get _days {

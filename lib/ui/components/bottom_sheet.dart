@@ -9,7 +9,7 @@ import '../components/colors.dart';
 import '../components/notch.dart';
 
 class AMBottomSheet extends StatelessWidget {
-  const AMBottomSheet(this.bodyWidget);
+  const AMBottomSheet(this.bodyWidget, {super.key});
 
   final Widget bodyWidget;
 

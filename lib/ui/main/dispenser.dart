@@ -9,7 +9,7 @@ import '../components/colors.dart';
 import '../components/text_widgets.dart';
 
 class Dispenser extends StatelessWidget {
-  const Dispenser({required this.value, required this.onDragCompleted});
+  const Dispenser({super.key, required this.value, required this.onDragCompleted});
 
   @protected
   final num value;
@@ -47,7 +47,7 @@ class Dispenser extends StatelessWidget {
       child: Column(
         children: [
           NormalText(
-            '${Intl.message(settings.measureUnitCode, name: settings.measureUnitCode)}',
+            Intl.message(settings.measureUnitCode, name: settings.measureUnitCode),
             color: mainColor,
             padding: EdgeInsets.only(top: sidePadding, bottom: sidePadding * 2),
           ),

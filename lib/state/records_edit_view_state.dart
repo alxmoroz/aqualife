@@ -7,7 +7,7 @@ import '../services/globals.dart';
 
 part 'records_edit_view_state.g.dart';
 
-class RecordsEditViewState = _RecordsEditViewStateBase with _$RecordsEditViewState;
+class RecordsEditViewState extends _RecordsEditViewStateBase with _$RecordsEditViewState {}
 
 abstract class _RecordsEditViewStateBase with Store {
   /// календарь

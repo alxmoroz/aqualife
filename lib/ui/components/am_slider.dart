@@ -5,40 +5,41 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class AMSlider extends StatefulWidget {
-  AMSlider(
-      {this.min,
-      this.max,
-      required this.values,
-      this.fixedValues,
-      this.axis = Axis.horizontal,
-      this.handler,
-      this.rightHandler,
-      this.handlerHeight,
-      this.handlerWidth,
-      this.onDragStarted,
-      this.onDragCompleted,
-      this.onDragging,
-      this.rangeSlider = false,
-      this.rtl = false,
-      this.jump = false,
-      this.ignoreSteps = const [],
-      this.disabled = false,
-      this.touchSize,
-      this.visibleTouchArea = false,
-      this.minimumDistance = 0,
-      this.maximumDistance = 0,
-      this.tooltip,
-      this.trackBar = const AMSliderTrackBar(),
-      this.handlerAnimation = const AMSliderHandlerAnimation(),
-      this.selectByTap = true,
-      this.step = const AMSliderStep(),
-      this.hatchMark,
-      this.centeredOrigin = false,
-      this.lockHandlers = false,
-      this.lockDistance,
-      this.decoration,
-      this.foregroundDecoration})
-      : assert(touchSize == null || (touchSize >= 5 && touchSize <= 50)),
+  AMSlider({
+    super.key,
+    this.min,
+    this.max,
+    required this.values,
+    this.fixedValues,
+    this.axis = Axis.horizontal,
+    this.handler,
+    this.rightHandler,
+    this.handlerHeight,
+    this.handlerWidth,
+    this.onDragStarted,
+    this.onDragCompleted,
+    this.onDragging,
+    this.rangeSlider = false,
+    this.rtl = false,
+    this.jump = false,
+    this.ignoreSteps = const [],
+    this.disabled = false,
+    this.touchSize,
+    this.visibleTouchArea = false,
+    this.minimumDistance = 0,
+    this.maximumDistance = 0,
+    this.tooltip,
+    this.trackBar = const AMSliderTrackBar(),
+    this.handlerAnimation = const AMSliderHandlerAnimation(),
+    this.selectByTap = true,
+    this.step = const AMSliderStep(),
+    this.hatchMark,
+    this.centeredOrigin = false,
+    this.lockHandlers = false,
+    this.lockDistance,
+    this.decoration,
+    this.foregroundDecoration,
+  })  : assert(touchSize == null || (touchSize >= 5 && touchSize <= 50)),
         assert((ignoreSteps.isNotEmpty && step.rangeList == null) || (ignoreSteps.isEmpty)),
         assert((step.rangeList != null && minimumDistance == 0 && maximumDistance == 0) ||
             (minimumDistance > 0 && step.rangeList == null) ||
@@ -93,7 +94,7 @@ class AMSlider extends StatefulWidget {
   final BoxDecoration? foregroundDecoration;
 
   @override
-  _AMSliderState createState() => _AMSliderState();
+  State createState() => _AMSliderState();
 }
 
 class AMSliderFixedValue {
@@ -104,7 +105,7 @@ class AMSliderFixedValue {
 
   @override
   String toString() {
-    return percent.toString() + '-' + value.toString();
+    return '$percent-$value';
   }
 }
 
@@ -519,17 +520,17 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
         child: Opacity(
           opacity: 0,
           child: Listener(
-            onPointerUp: (_) {
+            onPointerUp: (event) {
               if (widget.selectByTap && !__dragging) {
                 tappedPositionWithPadding = _distance();
                 if (_distanceFromLeftHandler! < _distanceFromRightHandler!) {
                   if (!widget.rangeSlider) {
-                    _rightHandlerMove(_, tappedPositionWithPadding: tappedPositionWithPadding, selectedByTap: true);
+                    _rightHandlerMove(event, tappedPositionWithPadding: tappedPositionWithPadding, selectedByTap: true);
                   } else {
-                    _leftHandlerMove(_, tappedPositionWithPadding: tappedPositionWithPadding, selectedByTap: true);
+                    _leftHandlerMove(event, tappedPositionWithPadding: tappedPositionWithPadding, selectedByTap: true);
                   }
                 } else {
-                  _rightHandlerMove(_, tappedPositionWithPadding: tappedPositionWithPadding, selectedByTap: true);
+                  _rightHandlerMove(event, tappedPositionWithPadding: tappedPositionWithPadding, selectedByTap: true);
                 }
               } else {
                 if (_slidingByActiveTrackBar) {
@@ -550,10 +551,8 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
 
               setState(() {});
             },
-            onPointerMove: (_) {
-              pointerDragged(_);
-            },
-            onPointerDown: (_) {
+            onPointerMove: pointerDragged,
+            onPointerDown: (event) {
               _leftTapAndSlide = false;
               _rightTapAndSlide = false;
               _slidingByActiveTrackBar = false;
@@ -565,8 +564,8 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
                 final double lX = _leftHandlerXPosition! + _handlersPadding + _touchSize! + _containerLeft;
                 final double rX = _rightHandlerXPosition! + _handlersPadding + _touchSize! + _containerLeft;
 
-                _distanceFromRightHandler = rX - _.position.dx;
-                _distanceFromLeftHandler = lX - _.position.dx;
+                _distanceFromRightHandler = rX - event.position.dx;
+                _distanceFromLeftHandler = lX - event.position.dx;
 
                 leftHandlerLastPosition = lX;
                 rightHandlerLastPosition = rX;
@@ -574,8 +573,8 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
                 final double lY = _leftHandlerYPosition! + _handlersPadding + _touchSize! + _containerTop;
                 final double rY = _rightHandlerYPosition! + _handlersPadding + _touchSize! + _containerTop;
 
-                _distanceFromLeftHandler = lY - _.position.dy;
-                _distanceFromRightHandler = rY - _.position.dy;
+                _distanceFromLeftHandler = lY - event.position.dy;
+                _distanceFromRightHandler = rY - event.position.dy;
 
                 leftHandlerLastPosition = lY;
                 rightHandlerLastPosition = rY;
@@ -588,7 +587,7 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
                   _distanceFromLeftHandler! < 0) {
                 _slidingByActiveTrackBar = true;
               } else {
-                final thumbPosition = (widget.axis == Axis.vertical) ? _.position.dy : _.position.dx;
+                final thumbPosition = (widget.axis == Axis.vertical) ? event.position.dy : event.position.dx;
                 if (_distanceFromLeftHandler!.abs() < _distanceFromRightHandler!.abs() ||
                     (_distanceFromLeftHandler == _distanceFromRightHandler && thumbPosition < leftHandlerLastPosition)) {
                   _leftTapAndSlide = true;
@@ -603,10 +602,10 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
               if (_distanceFromRightHandler! > 0 && _distanceFromLeftHandler! < 0) {
                 if (widget.axis == Axis.horizontal) {
                   xDragTmp = 0;
-                  __lockedHandlersDragOffset = (_leftHandlerXPosition! + _containerLeft - _.position.dx).abs();
+                  __lockedHandlersDragOffset = (_leftHandlerXPosition! + _containerLeft - event.position.dx).abs();
                 } else {
                   yDragTmp = 0;
-                  __lockedHandlersDragOffset = (_leftHandlerYPosition! + _containerTop - _.position.dy).abs();
+                  __lockedHandlersDragOffset = (_leftHandlerYPosition! + _containerTop - event.position.dy).abs();
                 }
               }
 
@@ -626,7 +625,7 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
 
               setState(() {});
 
-              pointerDragged(_);
+              pointerDragged(event);
             },
             child: Draggable(
               axis: widget.axis,
@@ -1529,20 +1528,19 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
       bottom: bottom,
       right: right,
       child: Listener(
-        onPointerMove: (_) {
+        onPointerMove: (event) {
           __dragging = true;
-
-          _leftHandlerMove(_);
+          _leftHandlerMove(event);
         },
-        onPointerDown: (_) {
+        onPointerDown: (event) {
           if (widget.disabled || (widget.handler != null && widget.handler!.disabled)) {
             return;
           }
 
           _renderBoxInitialization();
 
-          xDragTmp = _.position.dx - _containerLeft - _leftHandlerXPosition!;
-          yDragTmp = _.position.dy - _containerTop - _leftHandlerYPosition!;
+          xDragTmp = event.position.dx - _containerLeft - _leftHandlerXPosition!;
+          yDragTmp = event.position.dy - _containerTop - _leftHandlerYPosition!;
 
           if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
             _leftTooltipOpacity = 1;
@@ -1699,7 +1697,7 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
     return validMove;
   }
 
-  void _rightHandlerMove(PointerEvent pointer, {double tappedPositionWithPadding = 0, bool selectedByTap = false}) {
+  void _rightHandlerMove(PointerEvent event, {double tappedPositionWithPadding = 0, bool selectedByTap = false}) {
     if (widget.disabled || (widget.rightHandler != null && widget.rightHandler!.disabled)) {
       return;
     }
@@ -1715,14 +1713,14 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
     bool validMove = true;
 
     if (widget.axis == Axis.horizontal) {
-      __dAxis = pointer.position.dx - tappedPositionWithPadding - _containerLeft;
+      __dAxis = event.position.dx - tappedPositionWithPadding - _containerLeft;
       __axisDragTmp = xDragTmp;
       __containerSizeWithoutPadding = _containerWidthWithoutPadding;
       __rightHandlerPosition = _rightHandlerXPosition;
       __leftHandlerPosition = _leftHandlerXPosition;
       __containerSizeWithoutHalfPadding = _constraintMaxWidth - _handlersPadding + 1;
     } else {
-      __dAxis = pointer.position.dy - tappedPositionWithPadding - _containerTop;
+      __dAxis = event.position.dy - tappedPositionWithPadding - _containerTop;
       __axisDragTmp = yDragTmp;
       __containerSizeWithoutPadding = _containerHeightWithoutPadding;
       __rightHandlerPosition = _rightHandlerYPosition;
@@ -1869,22 +1867,22 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
       right: right,
       bottom: bottom,
       child: Listener(
-        onPointerMove: (_) {
+        onPointerMove: (event) {
           __dragging = true;
           if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
             _rightTooltipOpacity = 1;
           }
-          _rightHandlerMove(_);
+          _rightHandlerMove(event);
         },
-        onPointerDown: (_) {
+        onPointerDown: (event) {
           if (widget.disabled || (widget.rightHandler != null && widget.rightHandler!.disabled)) {
             return;
           }
 
           _renderBoxInitialization();
 
-          xDragTmp = _.position.dx - _containerLeft - _rightHandlerXPosition!;
-          yDragTmp = _.position.dy - _containerTop - _rightHandlerYPosition!;
+          xDragTmp = event.position.dx - _containerLeft - _rightHandlerXPosition!;
+          yDragTmp = event.position.dy - _containerTop - _rightHandlerYPosition!;
 
           if (!_tooltipData.disabled! && _tooltipData.alwaysShowTooltip == false) {
             _rightTooltipOpacity = 1;
@@ -2114,12 +2112,12 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
       suffix,
     ];
 
-    Widget _tooltipHolderWidget = Column(
+    Widget tooltipHolderWidget = Column(
       mainAxisSize: MainAxisSize.min,
       children: children,
     );
     if (_tooltipData.direction == AMSliderTooltipDirection.top) {
-      _tooltipHolderWidget = Row(
+      tooltipHolderWidget = Row(
         mainAxisSize: MainAxisSize.max,
         children: children,
       );
@@ -2140,7 +2138,7 @@ class _AMSliderState extends State<AMSlider> with TickerProviderStateMixin {
                   decoration: _tooltipData.boxStyle!.decoration,
                   foregroundDecoration: _tooltipData.boxStyle!.foregroundDecoration,
                   transform: _tooltipData.boxStyle!.transform,
-                  child: _tooltipHolderWidget),
+                  child: tooltipHolderWidget),
         ),
       ),
     ));
@@ -2301,7 +2299,7 @@ class _MakeHandler extends StatelessWidget {
         shape: BoxShape.circle);
 
     return Center(
-      child: Container(
+      child: SizedBox(
         key: id,
         width: localWidth,
         height: localHeight,

@@ -11,7 +11,7 @@ import '../components/colors.dart';
 import '../components/icons.dart';
 import '../main/day_selector.dart';
 
-Future<void> showRecordsEditDialog(BuildContext context, [DateTime? date]) async {
+Future showRecordsEditDialog(BuildContext context, [DateTime? date]) async {
   if (date == null) {
     recordsEditViewState.setToday();
   }
@@ -25,6 +25,8 @@ Future<void> showRecordsEditDialog(BuildContext context, [DateTime? date]) async
 }
 
 class RecordsEditDialog extends StatelessWidget {
+  RecordsEditDialog({super.key});
+
   final textStyle = TextStyle(fontSize: isTablet ? 80 : 65, color: mainColor, fontWeight: FontWeight.w500);
 
   @override
@@ -32,7 +34,7 @@ class RecordsEditDialog extends StatelessWidget {
     return AMBottomSheet(
       Column(
         children: [
-          DaySelector(),
+          const DaySelector(),
           Padding(
             padding: EdgeInsets.symmetric(vertical: sidePadding, horizontal: sidePadding * 3),
             child: CupertinoTextField(

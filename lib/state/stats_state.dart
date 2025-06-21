@@ -6,7 +6,7 @@ import '../services/globals.dart';
 
 part 'stats_state.g.dart';
 
-class StatsState = _StatsStateBase with _$StatsState;
+class StatsState extends _StatsStateBase with _$StatsState {}
 
 abstract class _StatsStateBase with Store {
   @observable

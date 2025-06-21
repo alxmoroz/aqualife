@@ -9,12 +9,14 @@ import 'services/globals.dart';
 import 'ui/components/images.dart';
 import 'ui/main/main_view.dart';
 
-Future<void> main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(App());
 }
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +29,9 @@ class SplashScreen extends StatelessWidget {
 }
 
 class App extends StatelessWidget {
-  final Future<void> _initFuture = initGlobals();
+  final Future _initFuture = initGlobals();
+
+  App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class App extends StatelessWidget {
       title: 'AquaLife',
       home: FutureBuilder(
         future: _initFuture,
-        builder: (_, snapshot) => snapshot.connectionState == ConnectionState.done ? MainView() : SplashScreen(),
+        builder: (_, snapshot) => snapshot.connectionState == ConnectionState.done ? const MainView() : const SplashScreen(),
       ),
       // routes: {},
       localizationsDelegates: const [

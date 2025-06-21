@@ -12,6 +12,8 @@ import '../components/icons.dart';
 import '../components/text_widgets.dart';
 
 class DaySelector extends StatelessWidget {
+  const DaySelector({super.key});
+
   RecordsEditViewState get _state => recordsEditViewState;
 
   bool get _showTodayBtn {

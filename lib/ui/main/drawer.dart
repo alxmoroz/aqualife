@@ -9,6 +9,8 @@ import '../stats/month_selector.dart';
 import '../stats/records_list_view.dart';
 
 class ALDrawer extends StatelessWidget {
+  const ALDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,8 +26,8 @@ class ALDrawer extends StatelessWidget {
             //   trailing: chevronForwardIcon(context, color: darkColor),
             //   onTap: () => Navigator.of(context).popAndPushNamed(StatisticsView.routeName),
             // ),
-            MonthSelector(),
-            Expanded(child: RecordsListView()),
+            const MonthSelector(),
+            const Expanded(child: RecordsListView()),
             // const Spacer(),
             SizedBox(height: sidePadding),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
