@@ -11,6 +11,8 @@ import '../state/records_edit_view_state.dart';
 import '../state/records_state.dart';
 import '../state/stats_state.dart';
 
+/// Глобальные переменные состояния приложения
+/// В будущем рекомендуется перенести в Provider/Riverpod для лучшей архитектуры
 late AppSettings settings;
 late LiquidsState liquidsState;
 late RecordsState recordsState;
@@ -20,18 +22,11 @@ late StatsState statsState;
 late NotificationService notificationService;
 late PackageInfo packageInfo;
 
+/// Локализация
 S get loc => S.current;
 
-// TODO: перенести взаимодействие с БД в стейты
-
-// TODO: все глабальные штуки перенести в стейт приложения
-
-//TODO: UI-constants
-// bool get isTablet => iosInfo.model == 'iPad';
-bool get isTablet => false;
-
-// double get cardPadding => isTablet ? 20 : 10;
-double get sidePadding => 12;
+/// UI константы
+bool get isTablet => false; // TODO: реализовать определение планшета
 
 Future<void> initGlobals() async {
   await HiveStorage.init();

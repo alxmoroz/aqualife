@@ -5,6 +5,7 @@ import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../constants/app_constants.dart';
 import 'globals.dart';
 
 class NotificationData {
@@ -17,13 +18,13 @@ class NotificationData {
 
 class NotificationService {
   final lnPlugin = FlutterLocalNotificationsPlugin();
-  final lnDetails = const NotificationDetails(iOS: DarwinNotificationDetails(threadIdentifier: 'aqualife'));
+  final lnDetails = const NotificationDetails(iOS: DarwinNotificationDetails(threadIdentifier: AppConstants.notificationThreadId));
 
-  // TODO: убрать появление уведомлений при работе приложения
   Future init() async {
     await lnPlugin.initialize(
       const InitializationSettings(
         iOS: DarwinInitializationSettings(requestBadgePermission: false),
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       ),
     );
     await lnPlugin.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(alert: true, sound: true);
@@ -33,15 +34,23 @@ class NotificationService {
   }
 
   Future scheduleNotifications() async {
-    final notifications = [
-      NotificationData(tz.TZDateTime.local(2025, 1, 1, 09, 02), loc.notification_wakeup_title, loc.notification_wakeup_text),
-      NotificationData(tz.TZDateTime.local(2025, 1, 1, 11, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2025, 1, 1, 13, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2025, 1, 1, 15, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2025, 1, 1, 17, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2025, 1, 1, 19, 02), loc.notification_day_title, loc.notification_day_text),
-      NotificationData(tz.TZDateTime.local(2025, 1, 1, 21, 02), loc.notification_day_title, loc.notification_day_text),
-    ];
+    final notifications = <NotificationData>[];
+    
+    // Утреннее уведомление
+    notifications.add(NotificationData(
+      tz.TZDateTime.local(2025, 1, 1, AppConstants.notificationHours.first, AppConstants.notificationMinutes),
+      loc.notification_wakeup_title,
+      loc.notification_wakeup_text,
+    ));
+    
+    // Дневные уведомления
+    for (int i = 1; i < AppConstants.notificationHours.length; i++) {
+      notifications.add(NotificationData(
+        tz.TZDateTime.local(2025, 1, 1, AppConstants.notificationHours[i], AppConstants.notificationMinutes),
+        loc.notification_day_title,
+        loc.notification_day_text,
+      ));
+    }
 
     for (final n in notifications) {
       await lnPlugin.zonedSchedule(
