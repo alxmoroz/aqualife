@@ -2,6 +2,7 @@
 
 import 'package:mobx/mobx.dart';
 
+import '../constants/app_constants.dart';
 import '../models/record.dart';
 import '../services/date_utils.dart';
 import '../services/globals.dart';
@@ -12,7 +13,6 @@ part 'records_state.g.dart';
 class RecordsState extends _RecordsStateBase with _$RecordsState {}
 
 abstract class _RecordsStateBase with Store {
-  static const DEFAULT_LIQUID_CODE = 'water';
 
   @observable
   ObservableList<Record> records = ObservableList();
@@ -43,27 +43,27 @@ abstract class _RecordsStateBase with Store {
   DateTime get firstDate => records.isNotEmpty ? records.first.dateTime : DateTime.now();
 
   Future<void> addQuantityForDate({required int quantity, required DateTime date, String? liquidCode}) async {
-    final record = await _getOrCreateRecordForDate(date: date, liquidCode: liquidCode ?? DEFAULT_LIQUID_CODE);
+    final record = await _getOrCreateRecordForDate(date: date, liquidCode: liquidCode ?? AppConstants.defaultLiquidCode);
     await setQuantityForRecord(record, record.liquidQuantity + quantity);
   }
 
   Future<void> subtractQuantityForDate({required int quantity, required DateTime date, String? liquidCode}) async {
-    final record = await _getOrCreateRecordForDate(date: date, liquidCode: liquidCode ?? DEFAULT_LIQUID_CODE);
+    final record = await _getOrCreateRecordForDate(date: date, liquidCode: liquidCode ?? AppConstants.defaultLiquidCode);
     await setQuantityForRecord(record, record.liquidQuantity - quantity);
   }
 
   Future<void> setQuantityForDate({required int quantity, required DateTime date, String? liquidCode}) async {
-    final record = await _getOrCreateRecordForDate(date: date, liquidCode: liquidCode ?? DEFAULT_LIQUID_CODE);
+    final record = await _getOrCreateRecordForDate(date: date, liquidCode: liquidCode ?? AppConstants.defaultLiquidCode);
     await setQuantityForRecord(record, quantity);
   }
 
   Future<void> setQuantityForRecord(Record record, int quantity) async {
-    //валидация
-    if (quantity < 0) {
-      quantity = 0;
+    // Валидация количества
+    if (quantity < AppConstants.minQuantity) {
+      quantity = AppConstants.minQuantity;
     }
-    if (quantity > 9999) {
-      quantity = 9999;
+    if (quantity > AppConstants.maxQuantity) {
+      quantity = AppConstants.maxQuantity;
     }
 
     record.liquidQuantity = quantity;
@@ -85,6 +85,9 @@ abstract class _RecordsStateBase with Store {
   // именно вода за сегодня
   int get waterQuantityToday => waterQuantityForDate(DateTime.now());
 
-  //TODO: расчёт ежедневной нормы
-  int get dayQuota => 2000;
+  /// Рассчитывает ежедневную норму воды на основе веса пользователя
+  /// Рекомендуется 30-35 мл на 1 кг веса тела
+  int get dayQuota {
+    return settings.userWeight * AppConstants.mlPerKg;
+  }
 }
