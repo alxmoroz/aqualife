@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../services/globals.dart';
+import '../../constants/app_constants.dart';
 import '../components/colors.dart';
 import '../components/notch.dart';
 
@@ -30,7 +30,7 @@ class AMBottomSheet extends StatelessWidget {
             children: [
               const Notch(),
               bodyWidget,
-              SizedBox(height: sidePadding * 2),
+              const SizedBox(height: AppConstants.sidePadding * 2),
             ],
           ),
         ),
