@@ -26,7 +26,6 @@ late PackageInfo packageInfo;
 S get loc => S.current;
 
 /// UI константы
-bool get isTablet => false; // TODO: реализовать определение планшета
 
 Future<void> initGlobals() async {
   await HiveStorage.init();

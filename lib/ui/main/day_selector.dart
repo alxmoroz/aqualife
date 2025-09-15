@@ -31,7 +31,8 @@ class DaySelector extends StatelessWidget {
           if (_showTodayBtn)
             Align(
               alignment: Alignment.centerRight,
-              child: Button.icon(chevronFastForwardIcon(context), _state.setToday, padding: EdgeInsets.only(right: AppConstants.sidePadding * 2)),
+              child:
+                  Button.icon(chevronFastForwardIcon(context), _state.setToday, padding: const EdgeInsets.only(right: AppConstants.sidePadding * 2)),
             ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

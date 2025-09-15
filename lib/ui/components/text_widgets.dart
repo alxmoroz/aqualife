@@ -2,7 +2,6 @@
 
 import 'package:flutter/cupertino.dart';
 
-import '../../services/globals.dart';
 import 'colors.dart';
 
 class TextShadow {
@@ -59,7 +58,7 @@ class NormalText extends StatelessWidget {
     final textStyle = cupertinoTS.copyWith(
       color: CupertinoDynamicColor.maybeResolve(color ?? darkColor, context),
       fontWeight: weight ?? cupertinoTS.fontWeight,
-      fontSize: (size ?? cupertinoTS.fontSize ?? (isTablet ? 22 : 18)) * (sizeScale ?? 1),
+      fontSize: (size ?? cupertinoTS.fontSize ?? 18) * (sizeScale ?? 1),
       height: height ?? cupertinoTS.height,
     );
     return Padding(

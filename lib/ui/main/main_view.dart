@@ -37,7 +37,7 @@ class _MainViewState extends State<MainView> {
 
   Widget quantityText(String title) {
     return Center(
-      child: MediumText(title, size: isTablet ? 80 : 65, color: mainColor),
+      child: MediumText(title, size: 65, color: mainColor),
     );
   }
 
@@ -72,7 +72,7 @@ class _MainViewState extends State<MainView> {
                   child: Button.icon(
                     editIcon(context),
                     () => showRecordsEditDialog(context),
-                    padding: EdgeInsets.all(AppConstants.sidePadding * 2),
+                    padding: const EdgeInsets.all(AppConstants.sidePadding * 2),
                   ),
                 ),
               ),
@@ -115,7 +115,7 @@ class _MainViewState extends State<MainView> {
                           ),
                         ),
                       ),
-                      SizedBox(height: AppConstants.sidePadding),
+                      const SizedBox(height: AppConstants.sidePadding),
                       AnimatedContainer(
                         duration: duration,
                         transformAlignment: Alignment.center,

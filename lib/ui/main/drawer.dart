@@ -20,7 +20,7 @@ class ALDrawer extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            SizedBox(height: AppConstants.sidePadding),
+            const SizedBox(height: AppConstants.sidePadding),
             // ListTile(
             //   leading: chartIcon(context),
             //   title: MediumText(loc.statistics),
@@ -30,7 +30,7 @@ class ALDrawer extends StatelessWidget {
             const MonthSelector(),
             const Expanded(child: RecordsListView()),
             // const Spacer(),
-            SizedBox(height: AppConstants.sidePadding),
+            const SizedBox(height: AppConstants.sidePadding),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               LightText(packageInfo.appName),
               NormalText(settings.version, padding: const EdgeInsets.only(left: 6)),

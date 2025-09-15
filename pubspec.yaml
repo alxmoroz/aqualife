@@ -16,8 +16,10 @@ dependencies:
   flutter_mobx: any
   flutter_native_timezone: any
   flutter_svg: any
+  intl: any
   hive: any
   mobx: any
+  timezone: any
   package_info_plus: any
   path_provider: any
 

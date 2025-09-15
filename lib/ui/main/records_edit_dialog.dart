@@ -28,7 +28,7 @@ Future showRecordsEditDialog(BuildContext context, [DateTime? date]) async {
 class RecordsEditDialog extends StatelessWidget {
   RecordsEditDialog({super.key});
 
-  final textStyle = TextStyle(fontSize: isTablet ? 80 : 65, color: mainColor, fontWeight: FontWeight.w500);
+  final textStyle = TextStyle(fontSize: 65, color: mainColor, fontWeight: FontWeight.w500);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class RecordsEditDialog extends StatelessWidget {
         children: [
           const DaySelector(),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: AppConstants.sidePadding, horizontal: AppConstants.sidePadding * 3),
+            padding: const EdgeInsets.symmetric(vertical: AppConstants.sidePadding, horizontal: AppConstants.sidePadding * 3),
             child: CupertinoTextField(
               controller: recordsEditViewState.controller,
               maxLength: 4,

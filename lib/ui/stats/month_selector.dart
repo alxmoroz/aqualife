@@ -29,7 +29,7 @@ class MonthSelector extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Button.icon(chevronFastForwardIcon(context), statsState.setCurrentMonth,
-                  padding: EdgeInsets.only(right: AppConstants.sidePadding * 2)),
+                  padding: const EdgeInsets.only(right: AppConstants.sidePadding * 2)),
             ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

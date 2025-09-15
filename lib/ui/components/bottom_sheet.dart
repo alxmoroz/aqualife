@@ -30,7 +30,7 @@ class AMBottomSheet extends StatelessWidget {
             children: [
               const Notch(),
               bodyWidget,
-              SizedBox(height: AppConstants.sidePadding * 2),
+              const SizedBox(height: AppConstants.sidePadding * 2),
             ],
           ),
         ),

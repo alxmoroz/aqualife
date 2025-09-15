@@ -50,7 +50,7 @@ class Dispenser extends StatelessWidget {
           NormalText(
             Intl.message(settings.measureUnitCode, name: settings.measureUnitCode),
             color: mainColor,
-            padding: EdgeInsets.only(top: AppConstants.sidePadding, bottom: AppConstants.sidePadding * 2),
+            padding: const EdgeInsets.only(top: AppConstants.sidePadding, bottom: AppConstants.sidePadding * 2),
           ),
           Expanded(
             child: AMSlider(
