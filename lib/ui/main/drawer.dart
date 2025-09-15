@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../constants/app_constants.dart';
 import '../../services/globals.dart';
 import '../components/colors.dart';
 import '../components/text_widgets.dart';
@@ -19,7 +20,7 @@ class ALDrawer extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            SizedBox(height: sidePadding),
+            SizedBox(height: AppConstants.sidePadding),
             // ListTile(
             //   leading: chartIcon(context),
             //   title: MediumText(loc.statistics),
@@ -29,7 +30,7 @@ class ALDrawer extends StatelessWidget {
             const MonthSelector(),
             const Expanded(child: RecordsListView()),
             // const Spacer(),
-            SizedBox(height: sidePadding),
+            SizedBox(height: AppConstants.sidePadding),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               LightText(packageInfo.appName),
               NormalText(settings.version, padding: const EdgeInsets.only(left: 6)),

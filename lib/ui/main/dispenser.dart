@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../constants/app_constants.dart';
 import '../../services/globals.dart';
 import '../components/am_slider.dart';
 import '../components/colors.dart';
@@ -49,7 +50,7 @@ class Dispenser extends StatelessWidget {
           NormalText(
             Intl.message(settings.measureUnitCode, name: settings.measureUnitCode),
             color: mainColor,
-            padding: EdgeInsets.only(top: sidePadding, bottom: sidePadding * 2),
+            padding: EdgeInsets.only(top: AppConstants.sidePadding, bottom: AppConstants.sidePadding * 2),
           ),
           Expanded(
             child: AMSlider(

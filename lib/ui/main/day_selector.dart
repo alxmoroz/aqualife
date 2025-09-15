@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
+import '../../constants/app_constants.dart';
 import '../../services/globals.dart';
 import '../../state/records_edit_view_state.dart';
 import '../components/buttons.dart';
@@ -30,7 +31,7 @@ class DaySelector extends StatelessWidget {
           if (_showTodayBtn)
             Align(
               alignment: Alignment.centerRight,
-              child: Button.icon(chevronFastForwardIcon(context), _state.setToday, padding: EdgeInsets.only(right: sidePadding * 2)),
+              child: Button.icon(chevronFastForwardIcon(context), _state.setToday, padding: EdgeInsets.only(right: AppConstants.sidePadding * 2)),
             ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

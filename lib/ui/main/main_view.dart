@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
+import '../../constants/app_constants.dart';
 import '../../services/globals.dart';
 import '../components/buttons.dart';
 import '../components/colors.dart';
@@ -71,7 +72,7 @@ class _MainViewState extends State<MainView> {
                   child: Button.icon(
                     editIcon(context),
                     () => showRecordsEditDialog(context),
-                    padding: EdgeInsets.all(sidePadding * 2),
+                    padding: EdgeInsets.all(AppConstants.sidePadding * 2),
                   ),
                 ),
               ),
@@ -114,7 +115,7 @@ class _MainViewState extends State<MainView> {
                           ),
                         ),
                       ),
-                      SizedBox(height: sidePadding),
+                      SizedBox(height: AppConstants.sidePadding),
                       AnimatedContainer(
                         duration: duration,
                         transformAlignment: Alignment.center,
